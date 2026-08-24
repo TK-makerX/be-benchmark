@@ -34,6 +34,24 @@ jobs:
       - run: python scripts/verify_release.py
       - run: python -m unittest discover -s tests -v
       - run: python scripts/wheel_smoke.py
+      - if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          Set-Content -LiteralPath unexpected.tmp -Value "manifest guard"
+          $failedAsExpected = $false
+          try {
+            ./scripts/setup.ps1
+          } catch {
+            $failedAsExpected = $true
+          } finally {
+            Remove-Item -LiteralPath unexpected.tmp -Force
+          }
+          if (-not $failedAsExpected) {
+            throw "setup.ps1 did not propagate release-verification failure"
+          }
+          if (Test-Path -LiteralPath .venv) {
+            throw "setup.ps1 continued after release-verification failure"
+          }
       - if: runner.os == 'Linux'
         run: sh scripts/setup.sh
       - if: runner.os == 'Windows'
@@ -50,3 +68,46 @@ jobs:
           persist-credentials: false
           fetch-depth: 1
       - run: docker build -f deployment/Dockerfile -t be-benchmark-shell .
+      - shell: bash
+        run: |
+          set -euo pipefail
+          container_id=$(docker run -d -p 127.0.0.1:8765:8765 be-benchmark-shell)
+          trap 'docker logs "$container_id"; docker rm -f "$container_id"' EXIT
+          python - <<'PY'
+          import json
+          import time
+          import urllib.error
+          import urllib.parse
+          import urllib.request
+
+          scheme = "http"
+          base_url = f"{scheme}://127.0.0.1:8765"
+          deadline = time.time() + 30
+          while True:
+              try:
+                  with urllib.request.urlopen(base_url + "/health", timeout=2) as response:
+                      assert response.status == 200
+                      assert json.loads(response.read().decode()) == {"status": "ok"}
+                      break
+              except OSError:
+                  if time.time() >= deadline:
+                      raise
+                  time.sleep(0.5)
+
+          body = urllib.parse.urlencode(
+              {
+                  "sequence": "ACGT" * 6,
+                  "editor_family": "example",
+                  "task": "example_operation",
+              }
+          ).encode()
+          request = urllib.request.Request(base_url + "/", data=body, method="POST")
+          try:
+              urllib.request.urlopen(request, timeout=5)
+              raise AssertionError("empty-backend POST unexpectedly succeeded")
+          except urllib.error.HTTPError as error:
+              response_body = error.read().decode()
+              assert error.code == 503
+              assert "backend_not_configured" in response_body
+              assert "&quot;prediction&quot;" not in response_body
+          PY
