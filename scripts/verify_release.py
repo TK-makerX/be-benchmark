@@ -56,8 +56,10 @@ def main() -> int:
     pyproject_text = actual.get("pyproject.toml").read_text(encoding="utf-8", errors="replace") if actual.get("pyproject.toml") else ""
     if "MIT License" not in readme_text:
         failures.append("README does not identify the MIT License")
-    if 'license = {file = "LICENSE"}' not in pyproject_text:
-        failures.append("pyproject.toml does not reference LICENSE")
+    if 'license = "MIT"' not in pyproject_text or 'license-files = ["LICENSE"]' not in pyproject_text:
+        failures.append("pyproject.toml does not declare the MIT license metadata")
+    if 'setuptools>=77' not in pyproject_text:
+        failures.append("pyproject.toml does not require the PEP 639-capable build backend")
     for name in sorted(set(expected) ^ set(actual)):
         failures.append(f"manifest mismatch: {name}")
     for name in sorted(set(expected) & set(actual)):
@@ -67,11 +69,17 @@ def main() -> int:
         if expected[name]["sha256"] != digest(path):
             failures.append(f"hash mismatch: {name}")
 
-    forbidden_roots = {"data", "results", "figures", "workflows", "environments", "third_party", "models", "weights"}
+    forbidden_roots = {
+        ".venv", "build", "data", "dist", "results", "figures", "workflows",
+        "environments", "third_party", "models", "weights",
+    }
     for name, path in actual.items():
-        if Path(name).parts and Path(name).parts[0] in forbidden_roots:
+        parts = Path(name).parts
+        if parts and parts[0] in forbidden_roots:
             failures.append(f"forbidden content directory: {name}")
-        if path.suffix.lower() in {".csv", ".tsv", ".xlsx", ".xls", ".parquet", ".pkl", ".pickle", ".pt", ".pth", ".h5", ".ckpt", ".pb", ".onnx", ".zip", ".tar", ".gz"}:
+        if any(part.endswith(".egg-info") for part in parts):
+            failures.append(f"package build metadata present: {name}")
+        if path.suffix.lower() in {".csv", ".tsv", ".xlsx", ".xls", ".parquet", ".pkl", ".pickle", ".pt", ".pth", ".h5", ".ckpt", ".pb", ".onnx", ".whl", ".zip", ".tar", ".gz"}:
             failures.append(f"forbidden data/model/archive file: {name}")
         if path.stat().st_size >= 5 * 1024 * 1024:
             failures.append(f"unexpected large file: {name}")

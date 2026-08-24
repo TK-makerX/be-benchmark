@@ -11,6 +11,7 @@ from urllib.parse import parse_qs
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+from be_benchmark_shell.registry import RegistryError
 from be_benchmark_shell.service import evaluate_request
 
 
@@ -54,8 +55,14 @@ class Handler(BaseHTTPRequestHandler):
                 fields.get("task", [""])[0],
             )
             status = 503 if payload.get("status") == "backend_not_configured" else 200
-        except Exception as exc:
+        except RegistryError as exc:
+            payload = {"status": "invalid_registry", "error": str(exc)}
+            status = 503
+        except (ValueError, KeyError, TypeError) as exc:
             payload = {"status": "invalid_request", "error": str(exc)}
+            status = 400
+        except Exception:
+            payload = {"status": "invalid_request", "error": "request could not be processed"}
             status = 400
         result = "<pre>" + html.escape(json.dumps(payload, indent=2)) + "</pre>"
         self._send(FORM.format(result=result), status)

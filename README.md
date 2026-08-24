@@ -17,10 +17,12 @@ The default registry is empty. Consequently, the application validates requests 
 
 Python 3.10 or later is required.
 
+Run the integrity check on a clean checkout before creating a virtual environment or installing the package.
+
 ```bash
+python scripts/verify_release.py
 python -m venv .venv
 .venv/Scripts/python -m pip install -e .
-.venv/Scripts/python scripts/verify_release.py
 .venv/Scripts/python app/run_cli.py --sequence REPLACE_WITH_SEQUENCE --editor-family example --task example_operation
 .venv/Scripts/python app/run_web_app.py
 ```

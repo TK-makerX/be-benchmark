@@ -7,31 +7,46 @@ from pathlib import Path
 from .backends import BackendSpec
 
 
-REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_REGISTRY = REPOSITORY_ROOT / "configs" / "backend_registry.template.json"
+class RegistryError(RuntimeError):
+    """Raised when an explicitly configured registry cannot be used."""
 
 
-def registry_path() -> Path:
-    return Path(os.environ.get("BE_SHELL_REGISTRY", str(DEFAULT_REGISTRY))).expanduser().resolve()
+def registry_path() -> Path | None:
+    configured = os.environ.get("BE_SHELL_REGISTRY")
+    if not configured:
+        return None
+    return Path(configured).expanduser().resolve()
 
 
 def load_backend_specs(path: Path | None = None) -> list[BackendSpec]:
-    selected = path or registry_path()
-    payload = json.loads(selected.read_text(encoding="utf-8"))
-    if payload.get("schema_version") != "1":
-        raise ValueError("unsupported backend registry schema")
+    selected = path if path is not None else registry_path()
+    if selected is None:
+        return []
+    try:
+        raw = selected.read_text(encoding="utf-8")
+    except OSError as exc:
+        raise RegistryError("configured registry is unavailable") from exc
+    try:
+        payload = json.loads(raw)
+    except json.JSONDecodeError as exc:
+        raise RegistryError("configured registry is invalid") from exc
+    if not isinstance(payload, dict) or payload.get("schema_version") != "1":
+        raise RegistryError("configured registry is invalid")
     records = payload.get("backends")
     if not isinstance(records, list):
-        raise ValueError("backends must be a list")
+        raise RegistryError("configured registry is invalid")
     specs = []
     for record in records:
-        specs.append(
-            BackendSpec(
-                backend_id=str(record["backend_id"]),
-                enabled=bool(record.get("enabled", False)),
-                editor_families=tuple(str(value).lower() for value in record.get("editor_families", [])),
-                tasks=tuple(str(value).lower() for value in record.get("tasks", [])),
-                connector=str(record.get("connector", "")),
+        try:
+            specs.append(
+                BackendSpec(
+                    backend_id=str(record["backend_id"]),
+                    enabled=bool(record.get("enabled", False)),
+                    editor_families=tuple(str(value).lower() for value in record.get("editor_families", [])),
+                    tasks=tuple(str(value).lower() for value in record.get("tasks", [])),
+                    connector=str(record.get("connector", "")),
+                )
             )
-        )
+        except (KeyError, TypeError, ValueError) as exc:
+            raise RegistryError("configured registry is invalid") from exc
     return specs
