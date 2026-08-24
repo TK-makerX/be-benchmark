@@ -52,6 +52,7 @@ jobs:
           if (Test-Path -LiteralPath .venv) {
             throw "setup.ps1 continued after release-verification failure"
           }
+          $global:LASTEXITCODE = 0
       - if: runner.os == 'Linux'
         run: sh scripts/setup.sh
       - if: runner.os == 'Windows'
