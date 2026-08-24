@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "be-benchmark-shell"
+version = "0.3.0rc0"
+description = "Generic interface scaffold for base-editor prediction backends"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.10"
+dependencies = []
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+]
+
+[project.scripts]
+be-benchmark-shell = "be_benchmark_shell.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

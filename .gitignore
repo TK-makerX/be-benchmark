@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+runtime_output/
+logs/
+*.log
+models/
+weights/
+private_backends/

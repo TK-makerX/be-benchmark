@@ -1,0 +1,25 @@
+{
+  "title": "Prediction request",
+  "type": "object",
+  "required": [
+    "sequence",
+    "editor_family",
+    "task"
+  ],
+  "properties": {
+    "sequence": {
+      "type": "string",
+      "pattern": "^[ACGTNacgtn]+$",
+      "minLength": 20
+    },
+    "editor_family": {
+      "type": "string",
+      "minLength": 1
+    },
+    "task": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": false
+}

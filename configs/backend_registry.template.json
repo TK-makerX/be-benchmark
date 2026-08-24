@@ -1,0 +1,5 @@
+{
+  "schema_version": "1",
+  "backends": [],
+  "note": "Copy this file outside the repository and add separately licensed private backends."
+}
