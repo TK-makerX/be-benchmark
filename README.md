@@ -13,21 +13,23 @@ The scaffold provides only:
 
 The default registry is empty. Consequently, the application validates requests but does not produce a scientific prediction. Add a separately licensed backend in a private deployment before numerical inference is possible.
 
-## Local demonstration
+## Quick start: no model or dataset required
 
-Python 3.10 or later is required.
+Python 3.10 or later is required. The source-tree demonstration uses only the Python standard library; it does not require package installation, a GPU or a model download.
 
-Run the integrity check on a clean checkout before creating a virtual environment or installing the package.
+Run these commands from a clean checkout, before creating a virtual environment or installing the package:
 
-```bash
-python scripts/verify_release.py
-python -m venv .venv
-.venv/Scripts/python -m pip install -e .
-.venv/Scripts/python app/run_cli.py --sequence REPLACE_WITH_SEQUENCE --editor-family example --task example_operation
-.venv/Scripts/python app/run_web_app.py
+```text
+python -B scripts/verify_release.py
+python -B examples/run_demo.py
+python -B -m unittest discover -s tests -v
 ```
 
-On Linux or macOS, use `.venv/bin/python`. The web interface binds to `127.0.0.1:8765` unless changed through environment variables.
+If your interpreter is named `python3`, use that command instead. The demonstration generates a repeated-character input in memory and explicitly selects the bundled empty registry. Its expected status is `backend_not_configured`, with a null backend identifier and no prediction field. This means the interface ran successfully; it is not a model prediction or a biological example.
+
+- [Environment and installation](docs/environment.md): source-only use, virtual environments, configuration and checks.
+- [Running the examples](docs/running_examples.md): CLI commands, the local web form, expected responses and troubleshooting.
+- [Publication scope](docs/publication_scope.md): what this public repository does and does not include.
 
 This scaffold is not the analysis code used to generate an article and must not be described as a result-reproduction package.
 
