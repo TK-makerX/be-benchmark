@@ -9,8 +9,8 @@ from pathlib import Path
 
 
 def main() -> None:
-    repo = Path(r"E:\AIselect\BEs\DeepBaseEditor-Paired-Library\repo\DeepBaseEditor\ABE_Efficiency")
-    out_dir = Path(r"E:\AIselect\BEs\DeepBaseEditor-Paired-Library\outputs")
+    repo = Path(os.environ.get("BE_REPLAY_PROJECT", ".")) / "DeepBaseEditor-Paired-Library/repo/DeepBaseEditor/ABE_Efficiency"
+    out_dir = Path(os.environ.get("BE_REPLAY_PROJECT", ".")) / "DeepBaseEditor-Paired-Library/outputs"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     import tensorflow.compat.v1 as tf_v1  # noqa: PLC0415
@@ -25,7 +25,7 @@ def main() -> None:
         source = source_path.read_text(encoding="utf-8")
         source = source.replace(
             "parameters           = {'0': 'ABE_Efficiency_sample.txt'}",
-            "parameters           = {'0': 'E:/AIselect/BEs/DeepBaseEditor-Paired-Library/reproduction/ABE_Efficiency_sample_30nt.txt'}",
+            "parameters           = {'0': 'DeepBaseEditor-Paired-Library/reproduction/ABE_Efficiency_sample_30nt.txt'}",
         )
         source = source.replace("path                 = './'", "path                 = ''")
         source = source.replace("length  = 24", "length  = 25")

@@ -2,12 +2,13 @@
 Reads saved artifacts and mirrors only input guards; never imports model code,
 runs inference, or recomputes performance metrics. Writes stay in this folder.
 """
+import os
 from pathlib import Path
 from collections import Counter, defaultdict
 import csv,json,hashlib,math,re,sys
 
 sys.stdout.reconfigure(encoding='utf-8')
-R=Path('E:/AIselect/BEs');B=R/'benchmark_core';O=Path(__file__).resolve().parent
+R=Path(os.environ.get("BE_REPLAY_PROJECT", "."));B=R/'benchmark_core';O=Path(__file__).resolve().parent
 RUN=B/'runs/T3_position_profile_v1'
 MAN=B/'data/processed/T3_position_profile_matrix/panels_v1/T3_v1_panel_manifest.json'
 JOIN=B/'formal_results/T3_position_profile_v1/T3_position_joined_universe_predictions.csv'

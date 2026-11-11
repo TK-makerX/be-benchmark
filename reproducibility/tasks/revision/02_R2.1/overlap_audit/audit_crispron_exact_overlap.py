@@ -5,6 +5,7 @@ Python standard library only. Run with the bundled Python listed in README.md.
 """
 from __future__ import annotations
 
+import os
 import csv
 import gzip
 import hashlib
@@ -15,7 +16,7 @@ from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
-ROOT = Path("E:/AIselect/BEs")
+ROOT = Path(os.environ.get("BE_REPLAY_PROJECT", "."))
 OUT = Path(__file__).resolve().parent
 EXPECTED_OUT = (ROOT / "SCI-data/返修/02_R2.1/overlap_audit").resolve()
 assert OUT == EXPECTED_OUT, "Keep all audit output inside the authorized directory"
@@ -336,7 +337,7 @@ def main():
         item["unchanged_during_audit"] = item["sha256_before"] == item["sha256_after"]
     assert all(x["unchanged_during_audit"] for x in inputs.values())
     csv_write("input_source_hashes.csv", inputs.values())
-    contract = {"started_utc": started, "finished_utc": datetime.now(timezone.utc).isoformat(), "python_executable": sys.executable, "python_version": sys.version,
+    contract = {"started_utc": started, "finished_utc": datetime.now(timezone.utc).isoformat(), "python_version": sys.version,
         "script_path": str(Path(__file__).resolve()), "script_sha256": sha(__file__), "output_directory": str(OUT),
         "analysis_type": "exact sequence-overlap audit only; no performance evaluation, model inference, retraining, or original file changes",
         "legacy_definition": "uppercase + retain ACGT; same-orientation guide equality; first guide occurrence in development surro_target, slice [idx-4:idx+26]; ABE train/test union",

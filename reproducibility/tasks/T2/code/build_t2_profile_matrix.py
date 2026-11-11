@@ -1,14 +1,11 @@
 #!/usr/bin/env python
 """
-Build a draft T2 bystander/editing-pattern matrix.
-
-This is deliberately a schema-and-data draft, not a full benchmark run.  It
-materializes BE-Hive observed bystander outcome profiles and position-level
-profiles while keeping the conditional-vs-absolute measurement scale explicit.
+Build the T2 outcome and position profile matrices from BE-Hive and related sources.
 """
 
 from __future__ import annotations
 
+import os
 import argparse
 import hashlib
 import json
@@ -21,16 +18,14 @@ from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 import pandas as pd
 
 
-ROOT = Path(r"E:\AIselect\BEs\benchmark_core")
+ROOT = Path(os.environ.get("BE_REPLAY_PROJECT", ".")) / "benchmark_core"
 DATA = ROOT / "data"
 MANUAL = DATA / "manual_downloads"
 BEHIVE_BYSTANDER = MANUAL / "be_hive_bystander"
 BEHIVE_EFFICIENCY = MANUAL / "be_hive_efficiency"
 CGBE_SMART = MANUAL / "cgbe_smart_processed"
 FORECAST_PROCESSED = MANUAL / "forecast_be" / "forecast_be_processed_data.tsv"
-BEDICT2_SUPP = Path(
-    r"E:\AIselect\BEs\BEDICT-V2\resources\paper_supplements\13059_2025_3586_MOESM4_ESM.xlsx"
-)
+BEDICT2_SUPP = ROOT.parent / "BEDICT-V2/resources/paper_supplements/13059_2025_3586_MOESM4_ESM.xlsx"
 OUT_DEFAULT = DATA / "processed" / "T2_bystander_matrix"
 
 DNA = set("ACGT")
@@ -443,20 +438,20 @@ def schema_payload(
                 "primary_key": ["source_profile_id"],
                 "purpose": "Source-level audit, including candidate sources not yet materialized into draft profile rows.",
             },
-            "target_profile_t2_draft.csv": {
+            "T2_observed_target_profiles.csv": {
                 "primary_key": ["target_profile_id"],
                 "purpose": "One row per target/editor/cell context with sequence metadata and target-level product-profile summaries.",
                 "columns": TARGET_COLUMNS,
             },
-            "position_profile_t2_draft.csv": {
+            "T2_observed_position_profiles.csv": {
                 "primary_key": ["position_profile_id"],
-                "foreign_keys": {"target_profile_id": "target_profile_t2_draft.target_profile_id"},
+                "foreign_keys": {"target_profile_id": "T2_observed_target_profiles.target_profile_id"},
                 "purpose": "One row per editable position per target, derived from observed outcome distributions.",
                 "columns": POSITION_COLUMNS,
             },
-            "outcome_profile_t2_draft.csv": {
+            "T2_observed_outcome_profiles.csv": {
                 "primary_key": ["outcome_profile_id"],
-                "foreign_keys": {"target_profile_id": "target_profile_t2_draft.target_profile_id"},
+                "foreign_keys": {"target_profile_id": "T2_observed_target_profiles.target_profile_id"},
                 "purpose": "Long-form product/outcome rows for the sampled draft targets.",
                 "columns": OUTCOME_COLUMNS,
             },
@@ -505,9 +500,9 @@ def write_report(
         "## Output tables",
         "",
         f"- source_inventory_t2.csv: {len(source_inventory)} source rows",
-        f"- target_profile_t2_draft.csv: {len(target_df)} target rows",
-        f"- position_profile_t2_draft.csv: {len(position_df)} position rows",
-        f"- outcome_profile_t2_draft.csv: {len(outcome_df)} outcome rows",
+        f"- T2_observed_target_profiles.csv: {len(target_df)} target rows",
+        f"- T2_observed_position_profiles.csv: {len(position_df)} position rows",
+        f"- T2_observed_outcome_profiles.csv: {len(outcome_df)} outcome rows",
         "",
         "## Measurement-scale decision",
         "",
@@ -558,10 +553,10 @@ def main() -> int:
 
     if args.report_only:
         source_inventory = pd.read_csv(out_dir / "source_inventory_t2.csv", dtype=str, low_memory=False).fillna("")
-        target_df = pd.read_csv(out_dir / "target_profile_t2_draft.csv", dtype=str, low_memory=False).fillna("")
-        position_df = pd.read_csv(out_dir / "position_profile_t2_draft.csv", dtype=str, low_memory=False).fillna("")
-        outcome_df = pd.read_csv(out_dir / "outcome_profile_t2_draft.csv", dtype=str, low_memory=False).fillna("")
-        (out_dir / "T2_SCHEMA_DRAFT.json").write_text(
+        target_df = pd.read_csv(out_dir / "T2_observed_target_profiles.csv", dtype=str, low_memory=False).fillna("")
+        position_df = pd.read_csv(out_dir / "T2_observed_position_profiles.csv", dtype=str, low_memory=False).fillna("")
+        outcome_df = pd.read_csv(out_dir / "T2_observed_outcome_profiles.csv", dtype=str, low_memory=False).fillna("")
+        (out_dir / "T2_profile_schema.json").write_text(
             json.dumps(
                 schema_payload(args.max_targets_per_source, args.max_outcomes_per_target, args.max_sources),
                 indent=2,
@@ -588,7 +583,7 @@ def main() -> int:
             "max_outcomes_per_target": args.max_outcomes_per_target,
             "report_only": True,
         }
-        (out_dir / "T2_DRAFT_MANIFEST.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+        (out_dir / "T2_profile_matrix_manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
         print(json.dumps(manifest, indent=2))
         return 0
 
@@ -825,10 +820,10 @@ def main() -> int:
     outcome_df = pd.DataFrame(outcome_rows, columns=OUTCOME_COLUMNS).fillna("")
 
     source_inventory.to_csv(out_dir / "source_inventory_t2.csv", index=False)
-    target_df.to_csv(out_dir / "target_profile_t2_draft.csv", index=False)
-    position_df.to_csv(out_dir / "position_profile_t2_draft.csv", index=False)
-    outcome_df.to_csv(out_dir / "outcome_profile_t2_draft.csv", index=False)
-    (out_dir / "T2_SCHEMA_DRAFT.json").write_text(
+    target_df.to_csv(out_dir / "T2_observed_target_profiles.csv", index=False)
+    position_df.to_csv(out_dir / "T2_observed_position_profiles.csv", index=False)
+    outcome_df.to_csv(out_dir / "T2_observed_outcome_profiles.csv", index=False)
+    (out_dir / "T2_profile_schema.json").write_text(
         json.dumps(
             schema_payload(args.max_targets_per_source, args.max_outcomes_per_target, args.max_sources),
             indent=2,
@@ -855,7 +850,7 @@ def main() -> int:
         "max_targets_per_source": args.max_targets_per_source,
         "max_outcomes_per_target": args.max_outcomes_per_target,
     }
-    (out_dir / "T2_DRAFT_MANIFEST.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    (out_dir / "T2_profile_matrix_manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     print(json.dumps(manifest, indent=2))
     return 0
 

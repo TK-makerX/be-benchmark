@@ -8,6 +8,7 @@ how many inputs are skipped, and wall-clock runtime.
 
 from __future__ import annotations
 
+import sys
 import argparse
 import csv
 import json
@@ -38,10 +39,10 @@ class T6Spec:
     include_tools: bool = False
 
 
-BEDICT_PYTHON = Path(r"E:\AIselect\envs\bedict_v2\python.exe")
-BEHIVE_EFF_PYTHON = Path(r"E:\AIselect\envs\behive_efficiency\python.exe")
-FORECAST_PYTHON = Path(r"E:\AIselect\envs\forecastbe\Scripts\python.exe")
-TF210_PYTHON = Path(r"E:\AIselect\envs\be_tf210\Scripts\python.exe")
+BEDICT_PYTHON = Path(os.environ.get("BE_BEDICT_PYTHON", sys.executable))
+BEHIVE_EFF_PYTHON = Path(os.environ.get("BE_BEHIVE_PYTHON", sys.executable))
+FORECAST_PYTHON = Path(os.environ.get("BE_FORECAST_PYTHON", sys.executable))
+TF210_PYTHON = Path(os.environ.get("BE_TF210_PYTHON", sys.executable))
 
 
 SPECS = [
@@ -151,7 +152,7 @@ def env_for_python(python_exe: Path, include_tools: bool = False) -> dict[str, s
         str(env_root / "Scripts"),
     ]
     if include_tools:
-        parts.insert(0, str(Path(r"E:\AIselect\BEs\tools\bin")))
+        parts.insert(0, str(Path(os.environ.get("BE_TOOLS_DIR", "tools/bin"))))
     parts.append(env.get("PATH", ""))
     env["PATH"] = os.pathsep.join([p for p in parts if p])
     env["TF_CPP_MIN_LOG_LEVEL"] = "2"

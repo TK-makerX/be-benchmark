@@ -19,7 +19,7 @@ def main():
         src=root/'benchmark_core/adapters'/f;sources[str(src)]=digest(src);s=src.read_text(encoding='utf-8')
         # Defaults are removed so a copied adapter never relies on the original machine path.
         s=re.sub(r'default=Path\(r"E:[^"]+"\)', 'required=True',s)
-        s=s.replace('DEEPBE_ROOT = Path(r"E:\\AIselect\\BEs\\DeepBE")','DEEPBE_ROOT = None')
+        s=re.sub(r"(?m)^DEEPBE_ROOT\s*=\s*Path\([^\r\n]+\)$", "DEEPBE_ROOT = None", s)
         s=s.replace('DEFAULT_WEIGHTS = DEEPBE_ROOT / "resources" / "extracted_models"','DEFAULT_WEIGHTS = None')
         s=s.replace('default=DEFAULT_WEIGHTS','required=True')
         (code/f).write_text(s,encoding='utf-8')

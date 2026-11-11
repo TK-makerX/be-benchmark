@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Create figure-ready T6 tables from the reproducibility registry."""
+"""Summarize model applicability, runtime and coverage from the T6 registry."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "config" / "model_reproducibility_registry_T6.csv"
-OUT = ROOT / "reports" / "t6_figure_ready_tables"
+OUT = ROOT / "reports" / "t6_applicability_tables"
 
 
 TASK_COLUMNS = [
@@ -199,7 +199,7 @@ def main() -> None:
     ].copy()
     license_audit.to_csv(OUT / "T6_license_redistribution_audit.csv", index=False)
 
-    print(f"Wrote T6 figure-ready tables to {OUT}")
+    print(f"Wrote T6 applicability tables to {OUT}")
     print(task_matrix.head().to_string(index=False))
 
 

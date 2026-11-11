@@ -259,7 +259,7 @@ def build_efficiency_scenario(
 
 
 def build_t2_multiobjective(matrix_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
-    target = pd.read_csv(matrix_dir / "target_profile_t2_draft.csv", dtype=str, low_memory=False).fillna("")
+    target = pd.read_csv(matrix_dir / "T2_observed_target_profiles.csv", dtype=str, low_memory=False).fillna("")
     target["measured_efficiency"] = numeric(target["measured_total_efficiency"])
     target["observed_product_purity"] = numeric(target["observed_max_product_frequency"])
     target["observed_bystander_burden"] = numeric(target["observed_any_bystander_frequency"])

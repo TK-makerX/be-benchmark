@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import shutil
 import subprocess
 import sys
@@ -9,8 +10,8 @@ from pathlib import Path
 
 
 def main() -> None:
-    repo = Path(r"E:\AIselect\BEs\EPCNNBE\repo")
-    out_dir = Path(r"E:\AIselect\BEs\EPCNNBE\outputs")
+    repo = Path(os.environ.get("BE_REPLAY_PROJECT", ".")) / "EPCNNBE/repo"
+    out_dir = Path(os.environ.get("BE_REPLAY_PROJECT", ".")) / "EPCNNBE/outputs"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     cmd = [sys.executable, str(repo / "EPCNNBE_web.py"), "abe", "test_seq_SOD1.fa"]

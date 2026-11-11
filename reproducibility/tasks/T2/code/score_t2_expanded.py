@@ -191,7 +191,7 @@ def build_model_inclusion_audit(output_dir: Path, registry_path: Path, run_statu
 
 
 def score_positions(matrix_dir: Path, runs_dir: Path, output_dir: Path) -> pd.DataFrame:
-    observed = pd.read_csv(matrix_dir / "position_profile_t2_draft.csv", dtype=str, low_memory=False).fillna("")
+    observed = pd.read_csv(matrix_dir / "T2_observed_position_profiles.csv", dtype=str, low_memory=False).fillna("")
     observed["_pos"] = numeric(observed["protospacer_position"]).astype("Int64").astype(str)
     observed["_obs"] = numeric(observed["observed_conditional_position_rate"])
 
@@ -250,8 +250,8 @@ def score_positions(matrix_dir: Path, runs_dir: Path, output_dir: Path) -> pd.Da
 
 
 def score_outcomes(matrix_dir: Path, runs_dir: Path, output_dir: Path) -> pd.DataFrame:
-    observed = pd.read_csv(matrix_dir / "outcome_profile_t2_draft.csv", dtype=str, low_memory=False).fillna("")
-    target = pd.read_csv(matrix_dir / "target_profile_t2_draft.csv", dtype=str, low_memory=False).fillna("")
+    observed = pd.read_csv(matrix_dir / "T2_observed_outcome_profiles.csv", dtype=str, low_memory=False).fillna("")
+    target = pd.read_csv(matrix_dir / "T2_observed_target_profiles.csv", dtype=str, low_memory=False).fillna("")
     complete_targets = set(target.loc[pd.to_numeric(target["outcome_row_count"], errors="coerce") <= 50, "target_profile_id"])
     observed = observed[observed["target_profile_id"].isin(complete_targets)].copy()
 

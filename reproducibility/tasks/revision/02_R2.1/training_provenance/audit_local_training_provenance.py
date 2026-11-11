@@ -3,6 +3,7 @@
 Outputs are restricted to this script's directory. Pickles are read using an
 allowlist limited to NumPy array reconstruction, not arbitrary model classes.
 """
+import os
 from pathlib import Path
 import csv, gzip, hashlib, json, pickle, re, sys
 from collections import Counter
@@ -10,7 +11,7 @@ import numpy as np
 import openpyxl
 
 sys.stdout.reconfigure(encoding='utf-8')
-ROOT = Path('E:/AIselect/BEs')
+ROOT = Path(os.environ.get("BE_REPLAY_PROJECT", "."))
 OUT = Path(__file__).resolve().parent
 MODELS = ['BEDICT-V2','BE-Hive-bystander','BE-Hive-efficiency','FORECasT-BE',
           'Yachie-base-editing-prediction','BE_Endo','DeepBE','EPCNNBE',

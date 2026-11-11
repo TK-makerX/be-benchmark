@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import argparse
 import json
 import subprocess
@@ -30,8 +31,8 @@ def main():
     raw.mkdir(parents=True, exist_ok=True)
     logs.mkdir(parents=True, exist_ok=True)
 
-    tf_python = Path(r"E:\AIselect\envs\be_tf210\Scripts\python.exe")
-    forecast_python = Path(r"E:\AIselect\envs\forecastbe\Scripts\python.exe")
+    tf_python = Path(os.environ.get("BE_TF210_PYTHON", sys.executable))
+    forecast_python = Path(os.environ.get("BE_FORECAST_PYTHON", sys.executable))
     specs = [
         {
             "model": "DeepBaseEditor", "id": "deepbaseeditor", "python": tf_python,

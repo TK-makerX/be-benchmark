@@ -6,6 +6,7 @@ maxwshen/be_predict_bystander in ../repo.
 
 from __future__ import annotations
 
+import os
 import argparse
 import json
 import sys
@@ -17,13 +18,13 @@ def main() -> None:
     parser.add_argument(
         "--repo",
         type=Path,
-        default=Path(r"E:\AIselect\BEs\BE-Hive-bystander\repo"),
+        default=Path(os.environ.get("BE_MODELS_DIR", os.environ.get("BE_REPLAY_PROJECT", "."))) / "BE-Hive-bystander/repo",
         help="Path to the be_predict_bystander source folder.",
     )
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=Path(r"E:\AIselect\BEs\BE-Hive-bystander\outputs"),
+        default=Path(os.environ.get("BE_MODELS_DIR", os.environ.get("BE_REPLAY_PROJECT", "."))) / "BE-Hive-bystander/outputs",
         help="Output directory for prediction CSV and stats JSON.",
     )
     parser.add_argument("--base-editor", default="BE4")

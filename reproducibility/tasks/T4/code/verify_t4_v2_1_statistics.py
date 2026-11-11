@@ -25,10 +25,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--root",
         type=Path,
-        default=Path(
-            r"E:\AIselect\BEs\benchmark_core\formal_results"
-            r"\T4_high_low_classification_v2_1_context_unit_ci_revision"
-        ),
+        default=Path(__file__).resolve().parents[1],
     )
     return parser.parse_args()
 

@@ -1,4 +1,4 @@
-﻿{
+{
   "system_name": "BE-Benchmark-informed prediction router",
   "system_version": "0.4.0-web-report-mvp",
   "input": {
@@ -45,7 +45,7 @@
       "integration_status": "locally_reproduced_hybrid_windows_wsl_helper",
       "runtime_family": "TensorFlow 2.10 + project-local WSL RNAfold helper",
       "license_reuse_note": "Business Source License; local benchmark use is recorded, production/hosted-service reuse needs license review.",
-      "local_path": "E:\\AIselect\\BEs\\CRISPRon-BE",
+      "local_path": "CRISPRon-BE",
       "task_routes": [
         {
           "task": "scalar_efficiency",
@@ -102,7 +102,7 @@
       "integration_status": "locally_reproduced_windows_native",
       "runtime_family": "modern CPU PyTorch",
       "license_reuse_note": "External web terms unresolved from local source.",
-      "local_path": "E:\\AIselect\\BEs\\BE-Hive-bystander",
+      "local_path": "BE-Hive-bystander",
       "task_routes": [
         {
           "task": "outcome_profile",
@@ -136,7 +136,7 @@
       "integration_status": "locally_reproduced_windows_native",
       "runtime_family": "modern CPU PyTorch",
       "license_reuse_note": "MIT license file present locally.",
-      "local_path": "E:\\AIselect\\BEs\\BEDICT-V2",
+      "local_path": "BEDICT-V2",
       "task_routes": [
         {
           "task": "outcome_profile",
@@ -166,7 +166,7 @@
       "integration_status": "locally_reproduced_windows_native_compatibility_runner",
       "runtime_family": "TensorFlow 2.10 compatibility",
       "license_reuse_note": "Model license unresolved from local source; local benchmark reuse only unless terms are reviewed.",
-      "local_path": "E:\\AIselect\\BEs\\DeepBE",
+      "local_path": "DeepBE",
       "task_routes": [
         {
           "task": "scalar_efficiency",
@@ -214,7 +214,7 @@
       "integration_status": "locally_reproduced_compatibility_runner",
       "runtime_family": "Python2/TF1 upstream via TensorFlow 2 compatibility runner",
       "license_reuse_note": "MIT evidence for relevant subdirectories; verify unlicensed paired assets before redistribution.",
-      "local_path": "E:\\AIselect\\BEs\\DeepBaseEditor-Paired-Library",
+      "local_path": "DeepBaseEditor-Paired-Library",
       "task_routes": [
         {
           "task": "scalar_efficiency",
@@ -253,7 +253,7 @@
       "integration_status": "locally_reproduced_windows_native",
       "runtime_family": "sklearn/joblib",
       "license_reuse_note": "MIT license file present locally; verify model-asset terms if redistributed.",
-      "local_path": "E:\\AIselect\\BEs\\FORECasT-BE",
+      "local_path": "FORECasT-BE",
       "task_routes": [
         {
           "task": "scalar_efficiency",
@@ -301,7 +301,7 @@
       "integration_status": "locally_reproduced_with_legacy_environment",
       "runtime_family": "legacy sklearn/Python 3.7",
       "license_reuse_note": "External web terms unresolved from local source.",
-      "local_path": "E:\\AIselect\\BEs\\BE-Hive-efficiency",
+      "local_path": "BE-Hive-efficiency",
       "task_routes": [
         {
           "task": "scalar_efficiency",
@@ -335,7 +335,7 @@
       "integration_status": "locally_reproduced_sequence_only",
       "runtime_family": "TensorFlow 2.10 compatibility",
       "license_reuse_note": "No local license found; local benchmark reuse only unless upstream terms are reviewed.",
-      "local_path": "E:\\AIselect\\BEs\\BE_Endo",
+      "local_path": "BE_Endo",
       "task_routes": [
         {
           "task": "outcome_profile",
@@ -365,7 +365,7 @@
       "integration_status": "locally_reproduced_windows_native",
       "runtime_family": "lightweight Python probability model",
       "license_reuse_note": "No local license found; local benchmark reuse only unless upstream terms are reviewed.",
-      "local_path": "E:\\AIselect\\BEs\\Yachie-base-editing-prediction",
+      "local_path": "Yachie-base-editing-prediction",
       "task_routes": [
         {
           "task": "outcome_profile",
@@ -395,7 +395,7 @@
       "integration_status": "locally_reproduced_windows_native",
       "runtime_family": "modern CPU PyTorch",
       "license_reuse_note": "No local license found; local benchmark reuse only unless upstream terms are reviewed.",
-      "local_path": "E:\\AIselect\\BEs\\EPCNNBE",
+      "local_path": "EPCNNBE",
       "task_routes": [
         {
           "task": "position_profile",
@@ -413,14 +413,14 @@
   ],
   "global_interpretation": "This MVP routes inputs to locally reproduced base-editor predictors and explains benchmark support. It does not fabricate numeric predictions when a model adapter has not been invoked. Performance claims must remain task-specific.",
   "canonical_evidence": {
-    "T1": "E:\\AIselect\\BEs\\benchmark_core\\formal_results\\T1_v6_common_core_abe_5model_full30000",
-    "T2": "E:\\AIselect\\BEs\\benchmark_core\\formal_results\\T2_expand_v0",
-    "T3": "E:\\AIselect\\BEs\\benchmark_core\\formal_results\\T3_position_profile_v1",
-    "T4": "E:\\AIselect\\BEs\\benchmark_core\\formal_results\\T4_high_low_classification_v1_corrected_labels",
-    "T5": "E:\\AIselect\\BEs\\benchmark_core\\formal_results\\T5_metadata_first_generalization_v0",
-    "T6": "E:\\AIselect\\BEs\\benchmark_core\\formal_results\\T6_reproducibility_applicability_v0",
-    "T7": "E:\\AIselect\\BEs\\benchmark_core\\formal_results\\T7_editor_design_recommendation_final_v1",
-    "T7_baseline": "E:\\AIselect\\BEs\\benchmark_core\\formal_results\\T7_editor_design_recommendation_baseline_v1"
+    "T1": "benchmark_core\\formal_results\\T1_v6_common_core_abe_5model_full30000",
+    "T2": "benchmark_core\\formal_results\\T2_expand_v0",
+    "T3": "benchmark_core\\formal_results\\T3_position_profile_v1",
+    "T4": "benchmark_core\\formal_results\\T4_high_low_classification_v1_corrected_labels",
+    "T5": "benchmark_core\\formal_results\\T5_metadata_first_generalization_v0",
+    "T6": "benchmark_core\\formal_results\\T6_reproducibility_applicability_v0",
+    "T7": "benchmark_core\\formal_results\\T7_editor_design_recommendation_final_v1",
+    "T7_baseline": "benchmark_core\\formal_results\\T7_editor_design_recommendation_baseline_v1"
   },
   "model_outputs": [
     {
@@ -480,7 +480,7 @@
       "predicted_efficiency_score": 0.1881799399852753,
       "score_scale": "DeepBaseEditor historical ABE_Efficiency output; raw script reports 100*model_output, converted score is raw/100.",
       "benchmark_interpretation": "Use as ABE scalar-efficiency backend with T1/T4/T6 caveats; legacy compatibility runner.",
-      "stderr_note": "tream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cufft64_10.dll'; dlerror: cufft64_10.dll not found\n2026-07-03 10:41:30.792413: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'curand64_10.dll'; dlerror: curand64_10.dll not found\n2026-07-03 10:41:30.793047: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cusolver64_11.dll'; dlerror: cusolver64_11.dll not found\n2026-07-03 10:41:30.793805: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cusparse64_11.dll'; dlerror: cusparse64_11.dll not found\n2026-07-03 10:41:30.794325: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cudnn64_8.dll'; dlerror: cudnn64_8.dll not found\n2026-07-03 10:41:30.794342: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1934] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.\nSkipping registering GPU devices...\n2026-07-03 10:41:30.897993: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:354] MLIR V1 optimization pass is not enabled\nE:\\AIselect\\BEs\\DeepBaseEditor-Paired-Library\\repo\\DeepBaseEditor\\ABE_Efficiency\\TEST_ABE_Efficiency.py:50: UserWarning: `tf.layers.dropout` is deprecated and will be removed in a future version. Please use `tf.keras.layers.Dropout` instead.\n  out_layer = tf.layers.dropout(tf.nn.relu(out_layer), 0.3, self.is_training)\nE:\\AIselect\\BEs\\DeepBaseEditor-Paired-Library\\repo\\DeepBaseEditor\\ABE_Efficiency\\TEST_ABE_Efficiency.py:73: UserWarning: `tf.layers.dropout` is deprecated and will be removed in a future version. Please use `tf.keras.layers.Dropout` instead.\n  L_fcl1_drop  = tf.layers.dropout(L_fcl1, 0.3, self.is_training)\n"
+      "stderr_note": "tream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cufft64_10.dll'; dlerror: cufft64_10.dll not found\n2026-07-03 10:41:30.792413: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'curand64_10.dll'; dlerror: curand64_10.dll not found\n2026-07-03 10:41:30.793047: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cusolver64_11.dll'; dlerror: cusolver64_11.dll not found\n2026-07-03 10:41:30.793805: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cusparse64_11.dll'; dlerror: cusparse64_11.dll not found\n2026-07-03 10:41:30.794325: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cudnn64_8.dll'; dlerror: cudnn64_8.dll not found\n2026-07-03 10:41:30.794342: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1934] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.\nSkipping registering GPU devices...\n2026-07-03 10:41:30.897993: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:354] MLIR V1 optimization pass is not enabled\nDeepBaseEditor-Paired-Library\\repo\\DeepBaseEditor\\ABE_Efficiency\\TEST_ABE_Efficiency.py:50: UserWarning: `tf.layers.dropout` is deprecated and will be removed in a future version. Please use `tf.keras.layers.Dropout` instead.\n  out_layer = tf.layers.dropout(tf.nn.relu(out_layer), 0.3, self.is_training)\nDeepBaseEditor-Paired-Library\\repo\\DeepBaseEditor\\ABE_Efficiency\\TEST_ABE_Efficiency.py:73: UserWarning: `tf.layers.dropout` is deprecated and will be removed in a future version. Please use `tf.keras.layers.Dropout` instead.\n  L_fcl1_drop  = tf.layers.dropout(L_fcl1, 0.3, self.is_training)\n"
     },
     {
       "model_id": "deepbe",
@@ -549,7 +549,6 @@
           }
         ]
       },
-      "stdout": "{\n  \"model_id\": \"deepbe\",\n  \"selected_inputs\": 1,\n  \"predictions\": 8,\n  \"skipped\": 0,\n  \"output\": \"C:\\\\Users\\\\tao\\\\AppData\\\\Local\\\\Temp\\\\be_prediction_system_deepbe_27pv12yt\\\\adapter_output\\\\predictions_deepbe_pilot.csv\"\n}\n",
       "stderr_note": "_110.dll not found\n2026-07-03 10:41:35.960627: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cublas64_11.dll'; dlerror: cublas64_11.dll not found\n2026-07-03 10:41:35.961018: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cublasLt64_11.dll'; dlerror: cublasLt64_11.dll not found\n2026-07-03 10:41:35.961437: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cufft64_10.dll'; dlerror: cufft64_10.dll not found\n2026-07-03 10:41:35.961819: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'curand64_10.dll'; dlerror: curand64_10.dll not found\n2026-07-03 10:41:35.962219: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cusolver64_11.dll'; dlerror: cusolver64_11.dll not found\n2026-07-03 10:41:35.962605: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cusparse64_11.dll'; dlerror: cusparse64_11.dll not found\n2026-07-03 10:41:35.962992: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cudnn64_8.dll'; dlerror: cudnn64_8.dll not found\n2026-07-03 10:41:35.963007: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1934] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.\nSkipping registering GPU devices...\n2026-07-03 10:41:35.963285: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX AVX2\nTo enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.\n"
     },
     {
@@ -633,8 +632,7 @@
           }
         ]
       },
-      "stdout": "SpRY | model_dir: E:\\AIselect\\BEs\\BEDICT-V2\\repo\\proportion_model\\output\\experiment_run_proportions_encenc_two_model\\ABE8e-SpRY_proportions_encenc_two_model\\protospacer_PAM\\exp_version_0\\train_val\\run_1\n--- processing input data frame ---\nnumber of NA: 0\n--- checking for violating seqs ---\ninput sequence length: 24\nnumber of NA: 0\n--- generating edit combinations ---\ncomb_final_df:\n Index(['seq_id', 'Inp_seq', 'Outp_seq'], dtype='object')\n24\ninput sequence length: 24\nnumber of NA: 0\nGenerating tensors using sequence config:\n +------------------------------------------------+-------+\n|           Sequence processing Config           | Value |\n+------------------------------------------------+-------+\n|                sequence length                 |   24  |\n|    sequence start index (0-based indexing)     |   0   |\n|     sequence end index (0-based indexing)      |   23  |\n| editable window start index (0-based indexing) |   0   |\n|  editable window end index (0-based indexing)  |   19  |\n|             offset start numbering             |   1   |\n|              offset end numbering              |   24  |\n+------------------------------------------------+-------+\ninput seq length 24\n--- tensorizing ---\n(1, 24)\n--- end ---\n--- creating datatensor ---\n--- loading model config ---\n--- building model ---\ninp_seqlen: 24 outp_seqlen: 24\n--- loading trained model ---\nrunning prediction for base_editor: ABE8e-SpRY | model_dir: E:\\AIselect\\BEs\\BEDICT-V2\\repo\\proportion_model\\output\\experiment_run_proportions_encenc_two_model\\ABE8e-SpRY_proportions_encenc_two_model\\protospacer_PAM\\exp_version_0\\train_val\\run_2\n{\n  \"model_id\": \"bedict_v2\",\n  \"predictions\": 31,\n  \"skipped\": 0,\n  \"raw_tables\": [\n    \"C:\\\\Users\\\\tao\\\\AppData\\\\Local\\\\Temp\\\\be_prediction_system_bedict_v2_703it9ol\\\\adapter_output\\\\raw_bedict_v2_predictions_ABE8e-SpRY.csv\"\n  ],\n  \"output\": \"C:\\\\Users\\\\tao\\\\AppData\\\\Local\\\\Temp\\\\be_prediction_system_bedict_v2_703it9ol\\\\adapter_output\\\\predictions_bedict_v2_pilot.csv\"\n}\n",
-      "stderr_note": "ll be removed in a future version. To retain the old behavior, explicitly call `result.infer_objects(copy=False)`. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`\n  baseseq_df.replace(['A', 'C', 'T', 'G'], [0,1,2,3], inplace=True)\n\n250it [00:00, 19230.75it/s]            \n\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|��������������������| 1/1 [00:00<00:00, 499.80it/s]\n\n0it [00:00, ?it/s]\n1it [00:00, 124.95it/s]\n\n  0%|          | 0/100 [00:00<?, ?it/s]E:\\AIselect\\BEs\\BEDICT-V2\\repo\\utils\\sequence_process.py:354: FutureWarning: Downcasting behavior in `replace` is deprecated and will be removed in a future version. To retain the old behavior, explicitly call `result.infer_objects(copy=False)`. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`\n  baseseq_df.replace(['A', 'C', 'T', 'G'], [0,1,2,3], inplace=True)\n\n225it [00:00, 56237.32it/s]            \n\n0it [00:00, ?it/s]\n1it [00:00, 333.38it/s]\n\n  0%|          | 0/100 [00:00<?, ?it/s]E:\\AIselect\\BEs\\BEDICT-V2\\repo\\utils\\sequence_process.py:354: FutureWarning: Downcasting behavior in `replace` is deprecated and will be removed in a future version. To retain the old behavior, explicitly call `result.infer_objects(copy=False)`. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`\n  baseseq_df.replace(['A', 'C', 'T', 'G'], [0,1,2,3], inplace=True)\nE:\\AIselect\\BEs\\BEDICT-V2\\repo\\utils\\sequence_process.py:354: FutureWarning: Downcasting behavior in `replace` is deprecated and will be removed in a future version. To retain the old behavior, explicitly call `result.infer_objects(copy=False)`. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`\n  baseseq_df.replace(['A', 'C', 'T', 'G'], [0,1,2,3], inplace=True)\n\n250it [00:00, 17234.41it/s]            \n\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|��������������������| 1/1 [00:00<00:00, 499.50it/s]\n\n0it [00:00, ?it/s]\n1it [00:00, 142.85it/s]\n"
+      "stderr_note": "ll be removed in a future version. To retain the old behavior, explicitly call `result.infer_objects(copy=False)`. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`\n  baseseq_df.replace(['A', 'C', 'T', 'G'], [0,1,2,3], inplace=True)\n\n250it [00:00, 19230.75it/s]            \n\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|��������������������| 1/1 [00:00<00:00, 499.80it/s]\n\n0it [00:00, ?it/s]\n1it [00:00, 124.95it/s]\n\n  0%|          | 0/100 [00:00<?, ?it/s]BEDICT-V2\\repo\\utils\\sequence_process.py:354: FutureWarning: Downcasting behavior in `replace` is deprecated and will be removed in a future version. To retain the old behavior, explicitly call `result.infer_objects(copy=False)`. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`\n  baseseq_df.replace(['A', 'C', 'T', 'G'], [0,1,2,3], inplace=True)\n\n225it [00:00, 56237.32it/s]            \n\n0it [00:00, ?it/s]\n1it [00:00, 333.38it/s]\n\n  0%|          | 0/100 [00:00<?, ?it/s]BEDICT-V2\\repo\\utils\\sequence_process.py:354: FutureWarning: Downcasting behavior in `replace` is deprecated and will be removed in a future version. To retain the old behavior, explicitly call `result.infer_objects(copy=False)`. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`\n  baseseq_df.replace(['A', 'C', 'T', 'G'], [0,1,2,3], inplace=True)\nBEDICT-V2\\repo\\utils\\sequence_process.py:354: FutureWarning: Downcasting behavior in `replace` is deprecated and will be removed in a future version. To retain the old behavior, explicitly call `result.infer_objects(copy=False)`. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`\n  baseseq_df.replace(['A', 'C', 'T', 'G'], [0,1,2,3], inplace=True)\n\n250it [00:00, 17234.41it/s]            \n\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|��������������������| 1/1 [00:00<00:00, 499.50it/s]\n\n0it [00:00, ?it/s]\n1it [00:00, 142.85it/s]\n"
     },
     {
       "model_id": "behive_bystander",
@@ -645,8 +643,7 @@
           "benchmark_id": "user_input_0001",
           "reason": "BE-Hive bystander requires concrete 50nt sequence"
         }
-      ],
-      "stdout": "{\n  \"model_id\": \"behive_bystander\",\n  \"predictions\": 0,\n  \"skipped\": 1,\n  \"output\": \"C:\\\\Users\\\\tao\\\\AppData\\\\Local\\\\Temp\\\\be_prediction_system_behive_bystander_0bn2dwed\\\\adapter_output\\\\predictions_behive_bystander_pilot.csv\"\n}\n"
+      ]
     },
     {
       "model_id": "behive_efficiency",
@@ -657,8 +654,7 @@
           "benchmark_id": "user_input_0001",
           "reason": "BE-Hive efficiency requires concrete 50nt sequence"
         }
-      ],
-      "stdout": "{\n  \"model_id\": \"behive_efficiency\",\n  \"predictions\": 0,\n  \"skipped\": 1,\n  \"output\": \"C:\\\\Users\\\\tao\\\\AppData\\\\Local\\\\Temp\\\\be_prediction_system_behive_efficiency_fx0s__eh\\\\adapter_output\\\\predictions_behive_efficiency_pilot.csv\"\n}\n"
+      ]
     },
     {
       "model_id": "yachie_base_editing_prediction",
@@ -678,7 +674,6 @@
           }
         ]
       },
-      "stdout": "{\n  \"model_id\": \"yachie_base_editing_prediction\",\n  \"predictions\": 1,\n  \"skipped\": 0,\n  \"output\": \"C:\\\\Users\\\\tao\\\\AppData\\\\Local\\\\Temp\\\\be_prediction_system_yachie_base_editing_prediction_d_9p6r0x\\\\adapter_output\\\\predictions_yachie_pilot.csv\"\n}\n",
       "stderr_note": ""
     },
     {
@@ -690,8 +685,7 @@
           "benchmark_id": "user_input_0001",
           "reason": "BE_Endo BE_Seq requires 40bp sequence with NGG PAM at positions 31-33"
         }
-      ],
-      "stdout": "{\n  \"model_id\": \"be_endo\",\n  \"predictions\": 0,\n  \"skipped\": 1,\n  \"output\": \"C:\\\\Users\\\\tao\\\\AppData\\\\Local\\\\Temp\\\\be_prediction_system_be_endo_mmzfoc_i\\\\adapter_output\\\\predictions_be_endo_seq_pilot.csv\"\n}\n"
+      ]
     },
     {
       "model_id": "epcnnbe",
@@ -711,7 +705,6 @@
           }
         ]
       },
-      "stdout": "{\n  \"model_id\": \"epcnnbe\",\n  \"predictions\": 2,\n  \"skipped\": 0,\n  \"output\": \"C:\\\\Users\\\\tao\\\\AppData\\\\Local\\\\Temp\\\\be_prediction_system_epcnnbe_42rgvtxk\\\\adapter_output\\\\predictions_epcnnbe_pilot.csv\"\n}\n",
       "stderr_note": ""
     },
     {
@@ -781,7 +774,6 @@
           }
         ]
       },
-      "stdout": "{\n  \"model_id\": \"crispron_be\",\n  \"predictions\": 8,\n  \"skipped\": 0,\n  \"output\": \"C:\\\\Users\\\\tao\\\\AppData\\\\Local\\\\Temp\\\\be_prediction_system_crispron_be_71_duvdp\\\\adapter_output\\\\predictions_crispron_be_pilot.csv\"\n}\n",
       "stderr_note": ""
     }
   ]

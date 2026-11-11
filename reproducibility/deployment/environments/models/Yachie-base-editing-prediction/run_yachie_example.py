@@ -2,14 +2,15 @@
 
 from __future__ import annotations
 
+import os
 import subprocess
 import sys
 from pathlib import Path
 
 
 def main() -> None:
-    repo = Path(r"E:\AIselect\BEs\Yachie-base-editing-prediction\repo")
-    output_dir = Path(r"E:\AIselect\BEs\Yachie-base-editing-prediction\outputs")
+    repo = Path(os.environ.get("BE_REPLAY_PROJECT", ".")) / "Yachie-base-editing-prediction/repo"
+    output_dir = Path(os.environ.get("BE_REPLAY_PROJECT", ".")) / "Yachie-base-editing-prediction/outputs"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     cmd = [

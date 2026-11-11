@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import os
 import argparse
 import json
 import re
@@ -15,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 T2_MATRIX = ROOT / "data" / "processed" / "T2_bystander_matrix"
 T3_MATRIX = ROOT / "data" / "processed" / "T3_position_profile_matrix"
 OUT = T3_MATRIX / "panels_v1"
-BEHIVE_MODELS = Path(r"E:\AIselect\BEs\BE-Hive-bystander\repo\models.csv")
+BEHIVE_MODELS = Path(os.environ.get("BE_MODELS_DIR", os.environ.get("BE_REPLAY_PROJECT", "."))) / "BE-Hive-bystander/repo/models.csv"
 
 EVENT_RE = re.compile(r"^([ACGT])(-?\d+)>([ACGT])$")
 DNA = set("ACGT")
@@ -189,9 +190,9 @@ def main() -> int:
     args = parser.parse_args()
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
-    target = pd.read_csv(args.matrix_dir / "target_profile_t2_draft.csv", dtype=str, low_memory=False).fillna("")
-    outcome = pd.read_csv(args.matrix_dir / "outcome_profile_t2_draft.csv", dtype=str, low_memory=False).fillna("")
-    position = pd.read_csv(args.matrix_dir / "position_profile_t2_draft.csv", dtype=str, low_memory=False).fillna("")
+    target = pd.read_csv(args.matrix_dir / "T2_observed_target_profiles.csv", dtype=str, low_memory=False).fillna("")
+    outcome = pd.read_csv(args.matrix_dir / "T2_observed_outcome_profiles.csv", dtype=str, low_memory=False).fillna("")
+    position = pd.read_csv(args.matrix_dir / "T2_observed_position_profiles.csv", dtype=str, low_memory=False).fillna("")
     target = add_windows(target)
     target = target.merge(target_event_flags(outcome), on="target_profile_id", how="left")
     target["outcome_row_count_num"] = pd.to_numeric(target["outcome_row_count"], errors="coerce")

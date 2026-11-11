@@ -8,6 +8,7 @@ sequence window and product subset it can actually consume.
 
 from __future__ import annotations
 
+import os
 import argparse
 import json
 import re
@@ -16,10 +17,10 @@ from pathlib import Path
 import pandas as pd
 
 
-ROOT = Path(r"E:\AIselect\BEs\benchmark_core")
+ROOT = Path(os.environ.get("BE_REPLAY_PROJECT", ".")) / "benchmark_core"
 T2 = ROOT / "data" / "processed" / "T2_bystander_matrix"
 OUT = T2 / "panels"
-BEHIVE_MODELS = Path(r"E:\AIselect\BEs\BE-Hive-bystander\repo\models.csv")
+BEHIVE_MODELS = Path(os.environ.get("BE_MODELS_DIR", os.environ.get("BE_REPLAY_PROJECT", "."))) / "BE-Hive-bystander/repo/models.csv"
 
 EVENT_RE = re.compile(r"^([ACGT])(-?\d+)>([ACGT])$")
 
@@ -156,8 +157,8 @@ def main() -> int:
     args = parser.parse_args()
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
-    target = pd.read_csv(args.matrix_dir / "target_profile_t2_draft.csv", dtype=str, low_memory=False).fillna("")
-    outcome = pd.read_csv(args.matrix_dir / "outcome_profile_t2_draft.csv", dtype=str, low_memory=False).fillna("")
+    target = pd.read_csv(args.matrix_dir / "T2_observed_target_profiles.csv", dtype=str, low_memory=False).fillna("")
+    outcome = pd.read_csv(args.matrix_dir / "T2_observed_outcome_profiles.csv", dtype=str, low_memory=False).fillna("")
     target = add_windows(target)
     flags = target_event_flags(outcome)
     target = target.merge(flags, on="target_profile_id", how="left")

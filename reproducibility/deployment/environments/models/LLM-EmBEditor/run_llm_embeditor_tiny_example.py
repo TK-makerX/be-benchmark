@@ -7,6 +7,7 @@ Qwen/Llama-scale experiment.
 
 from __future__ import annotations
 
+import os
 import shutil
 import subprocess
 import sys
@@ -14,7 +15,7 @@ from pathlib import Path
 
 
 def main() -> None:
-    root = Path(r"E:\AIselect\BEs\LLM-EmBEditor")
+    root = Path(os.environ.get("BE_REPLAY_PROJECT", ".")) / "LLM-EmBEditor"
     repo = root / "repo"
     data_dir = root / "reproduction" / "example_data"
     out_dir = root / "outputs" / "tiny_example"

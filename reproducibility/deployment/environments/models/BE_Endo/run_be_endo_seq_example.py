@@ -7,6 +7,7 @@ loads the bundled sequence-only Keras model and exports efficiency predictions.
 
 from __future__ import annotations
 
+import os
 import argparse
 import sys
 from pathlib import Path
@@ -16,9 +17,9 @@ import pandas as pd
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--repo", type=Path, default=Path(r"E:\AIselect\BEs\BE_Endo\repo"))
-    parser.add_argument("--input", type=Path, default=Path(r"E:\AIselect\BEs\BE_Endo\reproduction\test_input.tsv"))
-    parser.add_argument("--output-dir", type=Path, default=Path(r"E:\AIselect\BEs\BE_Endo\outputs"))
+    parser.add_argument("--repo", type=Path, default=Path(os.environ.get("BE_REPLAY_PROJECT", ".")) / "BE_Endo/repo")
+    parser.add_argument("--input", type=Path, default=Path(os.environ.get("BE_REPLAY_PROJECT", ".")) / "BE_Endo/reproduction/test_input.tsv")
+    parser.add_argument("--output-dir", type=Path, default=Path(os.environ.get("BE_REPLAY_PROJECT", ".")) / "BE_Endo/outputs")
     parser.add_argument("--editor", default="CBE", choices=["ABE", "CBE"])
     args = parser.parse_args()
 

@@ -59,18 +59,18 @@ def cases():
     rev = ["--revision-root", "{R}"]
     t3["commands"] = [("tasks/revision/02_R2.1/denominator_correction/code/correct_t3_denominators.py",
                        project + ["--output-dir", "{O}"])]
-    t4 = baseline("T4","verify_t4_fig5_v2_1_statistics.py", ["--root", f"{{P}}/{T4_V21}"], [],
+    t4 = baseline("T4","verify_t4_v2_1_statistics.py", ["--root", f"{{P}}/{T4_V21}"], [],
                   [T4_V21+"/source_data",T4_V21+"/tables"])
     t5 = baseline("T5","replay_joint_matching.py",["--output-dir","{O}"],
                   [("{O}/"+f,"tasks/T5/tables/"+f) for f in (
                       "T5_REFERENCE_TO_SHIFT_CONTRASTS_V1_1.csv","T5_T1_JOINT_MATCHING_ELIGIBILITY_V1_1.csv",
                       "T5_T1_JOINT_MATCHED_DUPLICATE_AUDIT_V1_1.csv")])
-    t6 = baseline("T6","build_t6_figure_ready_tables.py",[],
-                  [(f"{{P}}/{CORE}/reports/t6_figure_ready_tables/"+f,"tasks/T6/expected/"+f) for f in (
+    t6 = baseline("T6","build_t6_applicability_tables.py",[],
+                  [(f"{{P}}/{CORE}/reports/t6_applicability_tables/"+f,"tasks/T6/expected/"+f) for f in (
                       "T6_model_task_applicability_matrix.csv", "T6_coverage_and_failure_evidence.csv")],
                   [CORE+"/config/model_reproducibility_registry_T6.csv"],
-                  [("tasks/T6/code/build_t6_figure_ready_tables.py",f"{{P}}/{CORE}/scripts/build_t6_figure_ready_tables.py")])
-    t6["commands"] = [(f"{{P}}/{CORE}/scripts/build_t6_figure_ready_tables.py", [])]
+                  [("tasks/T6/code/build_t6_applicability_tables.py",f"{{P}}/{CORE}/scripts/build_t6_applicability_tables.py")])
+    t6["commands"] = [(f"{{P}}/{CORE}/scripts/build_t6_applicability_tables.py", [])]
     t7 = baseline("T7","replay_recommendation.py",["--output-dir","{O}"], [
         ("{O}/"+f, "tasks/T7/expected/"+f) for f in ("T7_unique_design_model_group_scores.csv",
          "T7_unique_design_random_group_scores.csv", "T7_unique_design_random_metric_distribution.csv",

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import json
 import sys
 import warnings
@@ -9,8 +10,8 @@ from pathlib import Path
 
 
 def main() -> None:
-    repo = Path(r"E:\AIselect\BEs\FORECasT-BE\repo")
-    out_dir = Path(r"E:\AIselect\BEs\FORECasT-BE\outputs")
+    repo = Path(os.environ.get("BE_REPLAY_PROJECT", ".")) / "FORECasT-BE/repo"
+    out_dir = Path(os.environ.get("BE_REPLAY_PROJECT", ".")) / "FORECasT-BE/outputs"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     sys.path.insert(0, str(repo))

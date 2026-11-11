@@ -671,8 +671,8 @@ def write_report(
         "",
         "## Input anchors",
         "",
-        f"- Observed position matrix: `{T2_MATRIX / 'position_profile_t2_draft.csv'}`",
-        f"- Target metadata: `{T2_MATRIX / 'target_profile_t2_draft.csv'}`",
+        f"- Observed position matrix: `{T2_MATRIX / 'T2_observed_position_profiles.csv'}`",
+        f"- Target metadata: `{T2_MATRIX / 'T2_observed_target_profiles.csv'}`",
         f"- T2 expanded predictions: `{T2_RESULTS}`",
         f"- T3 exploratory expansion run: `{T3_EXPLORATORY_RUNS}`",
         f"- T3 exploratory panels: `{T3_PANELS}`",
@@ -782,8 +782,8 @@ def main() -> int:
     args = parser.parse_args()
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
-    target = read_csv(args.matrix_dir / "target_profile_t2_draft.csv")
-    position = read_csv(args.matrix_dir / "position_profile_t2_draft.csv")
+    target = read_csv(args.matrix_dir / "T2_observed_target_profiles.csv")
+    position = read_csv(args.matrix_dir / "T2_observed_position_profiles.csv")
     target = add_input_flags(target)
 
     observed = build_observed_position_profile(target, position)

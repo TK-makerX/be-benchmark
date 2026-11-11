@@ -7,6 +7,7 @@ the corresponding PAM model plus the DeepBE_8e SavedModel.
 
 from __future__ import annotations
 
+import os
 import itertools
 from pathlib import Path
 
@@ -35,7 +36,7 @@ def one_hot_window(seq: str, start: int, length: int) -> np.ndarray:
 
 
 def main() -> None:
-    base = Path(r"E:\AIselect\BEs\DeepBE")
+    base = Path(os.environ.get("BE_REPLAY_PROJECT", ".")) / "DeepBE"
     weights = base / "resources" / "extracted_models"
     out_dir = base / "outputs"
     out_dir.mkdir(parents=True, exist_ok=True)

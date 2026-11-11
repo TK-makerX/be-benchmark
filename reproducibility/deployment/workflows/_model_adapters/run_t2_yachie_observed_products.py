@@ -60,7 +60,7 @@ def apply_events(seq30: str, events: str, protospacer_start: int = 4) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--panel", type=Path, required=True)
-    parser.add_argument("--outcome-profile", type=Path, default=data_path("BE_T2_OUTCOME_PROFILE", "processed", "T2_bystander_matrix", "outcome_profile_t2_draft.csv"))
+    parser.add_argument("--outcome-profile", type=Path, default=data_path("BE_T2_OUTCOME_PROFILE", "processed", "T2_bystander_matrix", "T2_observed_outcome_profiles.csv"))
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--repo", type=Path, default=model_path("BE_YACHIE_REPO", "Yachie-base-editing-prediction", "repo"))
     parser.add_argument("--run-id", default="T2_expand_v0_yachie")

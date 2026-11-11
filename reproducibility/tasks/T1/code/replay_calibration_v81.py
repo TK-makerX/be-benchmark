@@ -137,8 +137,8 @@ def strata_audit(analysis: pd.DataFrame, v8: Path, out: Path):
     strata = strata.sort_values(["display_order", "model"]).reset_index(drop=True)
     eligible["display_order"] = [order_map[(a, b)] for a, b in zip(eligible.metadata_field, eligible.level)]
     eligible = eligible.sort_values("display_order").reset_index(drop=True)
-    eligible.to_csv(out / "metrics" / "FIG2F_ELIGIBLE_STRATA.csv", index=False)
-    excluded.to_csv(out / "metrics" / "FIG2F_EXCLUDED_STRATA.csv", index=False)
+    eligible.to_csv(out / "metrics" / "T1_eligible_metadata_strata.csv", index=False)
+    excluded.to_csv(out / "metrics" / "T1_excluded_metadata_strata.csv", index=False)
     return strata, eligible, excluded
 
 

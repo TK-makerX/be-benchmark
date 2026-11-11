@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import argparse
 import json
 from pathlib import Path
@@ -15,13 +16,13 @@ def main() -> None:
     parser.add_argument(
         "--repo",
         type=Path,
-        default=Path(r"E:\AIselect\BEs\BEDICT-V2\repo"),
+        default=Path(os.environ.get("BE_REPLAY_PROJECT", ".")) / "BEDICT-V2/repo",
         help="BEDICT-V2 repository/worktree path.",
     )
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=Path(r"E:\AIselect\BEs\BEDICT-V2\outputs"),
+        default=Path(os.environ.get("BE_REPLAY_PROJECT", ".")) / "BEDICT-V2/outputs",
         help="Directory for the executed notebook and prediction table.",
     )
     args = parser.parse_args()

@@ -1,12 +1,13 @@
 """Exact overlap of declared panels with locally visible candidate development pools.
 No model calls, retraining, or performance calculations. All writes stay here.
 """
+import os
 from pathlib import Path
 from collections import defaultdict, Counter
 import csv, hashlib, json, re, sys
 
 sys.stdout.reconfigure(encoding='utf-8')
-ROOT=Path('E:/AIselect/BEs')
+ROOT=Path(os.environ.get("BE_REPLAY_PROJECT", "."))
 OUT=Path(__file__).resolve().parent
 MEMBERS=OUT/'available_sequence_memberships_non_CRISPRon.csv'
 PREFIX='candidate_overlap_'

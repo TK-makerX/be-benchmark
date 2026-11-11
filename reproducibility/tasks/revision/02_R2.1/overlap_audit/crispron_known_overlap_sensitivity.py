@@ -5,6 +5,7 @@ plotting, original manuscript changes or original result promotion.
 """
 from __future__ import annotations
 
+import os
 import hashlib
 import json
 import runpy
@@ -16,7 +17,7 @@ sys.dont_write_bytecode = True
 import numpy as np
 import pandas as pd
 
-ROOT = Path("E:/AIselect/BEs")
+ROOT = Path(os.environ.get("BE_REPLAY_PROJECT", "."))
 CORE = ROOT / "benchmark_core"
 OUT = Path(__file__).resolve().parent
 assert OUT == (ROOT / "SCI-data/返修/02_R2.1/overlap_audit").resolve()
@@ -310,7 +311,7 @@ def main():
         source["unchanged_during_sensitivity"] = source["sha256_before"] == source["sha256_after"]
     assert all(x["unchanged_during_sensitivity"] for x in sources.values())
     write("sensitivity_input_source_hashes.csv", pd.DataFrame(sources.values()))
-    manifest = {"started_utc": started, "finished_utc": datetime.now(timezone.utc).isoformat(), "script_sha256": digest(__file__), "python_executable": sys.executable,
+    manifest = {"started_utc": started, "finished_utc": datetime.now(timezone.utc).isoformat(), "script_sha256": digest(__file__),
         "original_baseline_metrics_reproduced": all(x["passed"] for x in checks), "n_baseline_metrics_checked": len(checks), "execution_or_explicit_skip_status_verified_for_all_input_targets": True,
         "exclusion_rule": "exclude explicit adapter skips first; forward exact 20nt OR 30nt against actual ABE/CBE backend author train/test union; actual class agrees with experimental class for every executed target",
         "no_model_inference_or_fitting": True, "no_original_file_changes": True, "no_figures_or_manuscript_edits": True,

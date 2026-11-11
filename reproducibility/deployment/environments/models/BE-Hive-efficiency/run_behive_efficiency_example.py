@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import argparse
 import json
 import sys
@@ -10,8 +11,8 @@ from pathlib import Path
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--repo", type=Path, default=Path(r"E:\AIselect\BEs\BE-Hive-efficiency\repo"))
-    parser.add_argument("--output-dir", type=Path, default=Path(r"E:\AIselect\BEs\BE-Hive-efficiency\outputs"))
+    parser.add_argument("--repo", type=Path, default=Path(os.environ.get("BE_REPLAY_PROJECT", ".")) / "BE-Hive-efficiency/repo")
+    parser.add_argument("--output-dir", type=Path, default=Path(os.environ.get("BE_REPLAY_PROJECT", ".")) / "BE-Hive-efficiency/outputs")
     parser.add_argument("--base-editor", default="BE4")
     parser.add_argument("--celltype", default="mES")
     parser.add_argument("--seq", default="TATCAGCGGGAATTCAAGCGCACCAGCCAGAGGTGTACCGTGGACGTGAG")
