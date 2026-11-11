@@ -1,0 +1,138 @@
+{
+  "schema_name": "unified_base_editing_benchmark_matrix_v5",
+  "generated": "2026-06-23",
+  "principle": "one audited long-form matrix plus task-specific views; no manuscript-facing Data1/Data2 labels",
+  "tables": {
+    "source_inventory": {
+      "primary_key": ["source_inventory_id"],
+      "columns": [
+        "source_inventory_id",
+        "source_family",
+        "source_dataset",
+        "source_file",
+        "source_sheet",
+        "source_row_count",
+        "source_size_mb",
+        "candidate_tasks",
+        "candidate_label_types",
+        "requires_manual_download",
+        "read_status",
+        "notes"
+      ]
+    },
+    "design_master": {
+      "primary_key": ["design_id"],
+      "columns": [
+        "design_id",
+        "sequence_context_original",
+        "sequence_56nt",
+        "sequence_50nt",
+        "sequence_30nt",
+        "sequence_29nt",
+        "protospacer_20nt",
+        "pam",
+        "pam_type",
+        "target_base",
+        "target_position",
+        "intended_edit",
+        "reference_allele",
+        "alternate_allele",
+        "gene",
+        "genomic_locus",
+        "sequence_qc_status",
+        "design_hash"
+      ]
+    },
+    "editor_context_master": {
+      "primary_key": ["editor_context_id"],
+      "columns": [
+        "editor_context_id",
+        "editor",
+        "editor_class",
+        "editor_family",
+        "cas_variant",
+        "pam_scope",
+        "cell_context",
+        "delivery",
+        "timepoint",
+        "replicate_strategy",
+        "editor_qc_status",
+        "editor_context_hash"
+      ]
+    },
+    "observation_matrix": {
+      "primary_key": ["observation_id"],
+      "foreign_keys": {
+        "design_id": "design_master.design_id",
+        "editor_context_id": "editor_context_master.editor_context_id"
+      },
+      "columns": [
+        "observation_id",
+        "design_id",
+        "editor_context_id",
+        "source_inventory_id",
+        "source_family",
+        "source_dataset",
+        "source_file",
+        "source_sheet",
+        "source_row_key",
+        "source_relation_to_model",
+        "source_role",
+        "label_type",
+        "measured_total_efficiency",
+        "measured_position_rate",
+        "measured_outcome_frequency",
+        "outcome_sequence",
+        "no_edit_frequency",
+        "desired_product_frequency",
+        "total_read_count",
+        "edited_read_count",
+        "replicate_count",
+        "measurement_scale",
+        "task_eligibility_T1",
+        "task_eligibility_T2",
+        "task_eligibility_T3",
+        "task_eligibility_T4",
+        "task_eligibility_T5",
+        "task_eligibility_T6",
+        "task_eligibility_T7",
+        "qc_sequence_pass",
+        "qc_label_pass",
+        "qc_editor_pass",
+        "qc_leakage_pass",
+        "qc_level",
+        "exclusion_reason",
+        "notes"
+      ]
+    }
+  },
+  "qc_levels": {
+    "A": "measured label, clean sequence/editor mapping, external to evaluated model, sufficient metadata",
+    "B": "measured label and clean sequence, but partial context or source-associated/possible-overlap",
+    "C": "measured label but weak metadata, non-standard scale, or aggregation assumptions",
+    "D": "prediction-only, annotation-only, or unclear measured label; not used for performance metrics"
+  },
+  "source_relation_values": [
+    "external",
+    "source_associated",
+    "unknown_possible_overlap"
+  ],
+  "label_type_values": [
+    "total_efficiency",
+    "position_rate",
+    "outcome_frequency",
+    "no_edit_frequency",
+    "desired_product_frequency",
+    "prediction_only",
+    "annotation_only"
+  ],
+  "task_view_policy": {
+    "main_benchmark": "prefer QC A rows; source-balanced aggregation required when one source dominates row count",
+    "sensitivity": "QC A plus QC B/C with explicit source and QC stratification",
+    "forbidden_features": [
+      "measured labels as model input",
+      "measured outcome distributions as T1 input",
+      "source-associated rows for primary external claims"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schema_name": "base_editor_benchmark_prediction",
+  "version": "0.1.0",
+  "required_columns": [
+    "prediction_id",
+    "benchmark_id",
+    "model_id",
+    "run_id",
+    "task_type"
+  ],
+  "columns": {
+    "prediction_id": "Stable prediction row identifier.",
+    "benchmark_id": "Foreign key to benchmark_input.benchmark_id.",
+    "model_id": "Foreign key to config/model_registry.csv.",
+    "run_id": "Identifier for a model run, including date or git hash when possible.",
+    "access_mode": "local, web_blackbox, manual_web, etc.",
+    "task_type": "efficiency, position_rate, outcome_distribution, bystander, offtarget.",
+    "predicted_efficiency": "Predicted total editing efficiency, 0-1 if calibrated.",
+    "predicted_position": "Position for position-level predictions.",
+    "predicted_outcome": "Predicted edited sequence or outcome label.",
+    "predicted_outcome_frequency": "Predicted specific outcome frequency, 0-1.",
+    "predicted_outcome_proportion": "Predicted proportion among edited reads, 0-1.",
+    "predicted_score": "Raw uncalibrated score or model-specific score.",
+    "model_editor": "Editor setting passed to the model.",
+    "model_cell_context": "Cell/context setting passed to the model.",
+    "raw_output_path": "Path to raw model output captured for audit.",
+    "model_version": "Git commit, release, web access date, or local status.",
+    "run_timestamp": "ISO timestamp.",
+    "notes": "Free-text caveats."
+  }
+}
+

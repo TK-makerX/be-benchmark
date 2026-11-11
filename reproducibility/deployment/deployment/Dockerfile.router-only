@@ -1,0 +1,8 @@
+FROM python:3.10-slim
+WORKDIR /opt/be-benchmark
+COPY app/ ./app/
+ENV BE_WEB_HOST=0.0.0.0
+ENV BE_WEB_PORT=8765
+EXPOSE 8765
+WORKDIR /opt/be-benchmark/app
+CMD ["python", "run_web_app.py"]

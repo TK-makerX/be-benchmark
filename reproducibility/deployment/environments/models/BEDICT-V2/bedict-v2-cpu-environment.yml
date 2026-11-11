@@ -1,0 +1,22 @@
+name: bedict-v2-cpu
+channels:
+  - defaults
+dependencies:
+  - python=3.10.13
+  - pip
+  - pip:
+      - torch==2.2.2
+      - torchvision==0.17.2
+      - numpy==1.26.4
+      - pandas==2.2.2
+      - pyarrow==15.0.2
+      - scipy==1.12.0
+      - scikit-learn==1.4.1.post1
+      - matplotlib==3.8.3
+      - seaborn==0.13.2
+      - tqdm==4.66.2
+      - prettytable==3.9.0
+      - openpyxl==3.1.2
+      - jupyter==1.0.0
+      - flask==3.0.2
+      - xgboost==2.0.3

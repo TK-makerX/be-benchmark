@@ -1,0 +1,32 @@
+{
+  "schema_name": "base_editor_benchmark_input",
+  "version": "0.1.0",
+  "required_columns": [
+    "benchmark_id",
+    "dataset_id",
+    "editor_class",
+    "sequence_context"
+  ],
+  "columns": {
+    "benchmark_id": "Stable row identifier unique within a benchmark dataset.",
+    "dataset_id": "Dataset or panel identifier.",
+    "source_type": "surrogate_library, endogenous, literature_example, synthetic_smoke, web_manual, etc.",
+    "editor": "Exact base editor name when known, e.g. ABE8e, ABEmax, BE4.",
+    "editor_class": "ABE, CBE, dual, CGBE, other.",
+    "cell_context": "Cell type, organism, delivery, or experimental context if known.",
+    "delivery": "plasmid, mRNA, AAV, LNP, unknown, etc.",
+    "cas_variant": "SpCas9, SpG, SpRY, NG, SaCas9, etc.",
+    "sequence_context": "Longest sequence supplied to or measured for the model.",
+    "protospacer_20nt": "20-nt guide/protospacer where available.",
+    "pam": "PAM sequence where available.",
+    "target_base": "A, C, G, or T when the intended target base is specified.",
+    "target_position": "1-based position within protospacer if available.",
+    "intended_edit": "A>G, C>T, C>G, etc.",
+    "reference_outcome": "Measured or intended edited sequence if available.",
+    "measured_efficiency": "Observed total editing efficiency, 0-1 when available.",
+    "measured_outcome_frequency": "Observed specific outcome frequency, 0-1 when available.",
+    "split": "train, validation, test, external_test, smoke, etc.",
+    "notes": "Free-text caveats."
+  }
+}
+

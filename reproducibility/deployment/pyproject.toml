@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "be-benchmark"
+version = "0.2.0rc0"
+description = "Endpoint-aware benchmark and local evidence-routing tools for base-editor prediction models"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+analysis = [
+  "numpy>=1.23,<3",
+  "pandas>=1.5,<3",
+  "openpyxl>=3.0,<4",
+]
+test = ["pytest>=7,<9"]
+
+[project.scripts]
+be-benchmark = "be_benchmark.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

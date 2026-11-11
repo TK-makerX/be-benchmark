@@ -1,0 +1,372 @@
+{
+  "status": "PASS",
+  "replay_count": 20,
+  "replays": [
+    {
+      "task": "T1",
+      "status": "PASS",
+      "tables_recomputed_and_compared": [
+        {
+          "table": "tasks/T1/metrics/PRIMARY_ASSOCIATION_METRICS.csv",
+          "rows": 8
+        },
+        {
+          "table": "tasks/T1/metrics/METADATA_STRATIFIED_ASSOCIATION.csv",
+          "rows": 20
+        },
+        {
+          "table": "tasks/T1/metrics/PRIMARY_DESIGN_CLUSTER_BOOTSTRAP_95CI.csv",
+          "rows": 4
+        },
+        {
+          "table": "tasks/T1/metrics/PAIRED_SPEARMAN_DIFFERENCE_BOOTSTRAP.csv",
+          "rows": 6
+        },
+        {
+          "table": "tasks/T1/expected/v8_1/CRISPRON_ABSOLUTE_CALIBRATION_SUMMARY.csv",
+          "rows": 1
+        },
+        {
+          "table": "tasks/T1/expected/v8_1/CRISPRON_PREDICTED_EFFICIENCY_DECILE_CALIBRATION.csv",
+          "rows": 10
+        }
+      ]
+    },
+    {
+      "task": "T2",
+      "status": "PASS",
+      "tables_recomputed_and_compared": [
+        {
+          "table": "tasks/T2/expected/T2_expanded_outcome_metrics.csv",
+          "rows": 5
+        },
+        {
+          "table": "tasks/T2/expected/T2_expanded_position_metrics.csv",
+          "rows": 7
+        }
+      ]
+    },
+    {
+      "task": "T3",
+      "status": "PASS",
+      "tables_recomputed_and_compared": [
+        {
+          "table": "tasks/revision/02_R2.1/denominator_correction/results/T3_corrected_metrics.csv",
+          "rows": 9
+        }
+      ]
+    },
+    {
+      "task": "T4",
+      "status": "PASS",
+      "tables_recomputed_and_compared": [],
+      "independent_checks": 327
+    },
+    {
+      "task": "T5",
+      "status": "PASS",
+      "tables_recomputed_and_compared": [
+        {
+          "table": "tasks/T5/tables/T5_REFERENCE_TO_SHIFT_CONTRASTS_V1_1.csv",
+          "rows": 12
+        },
+        {
+          "table": "tasks/T5/tables/T5_T1_JOINT_MATCHING_ELIGIBILITY_V1_1.csv",
+          "rows": 3
+        },
+        {
+          "table": "tasks/T5/tables/T5_T1_JOINT_MATCHED_DUPLICATE_AUDIT_V1_1.csv",
+          "rows": 24
+        }
+      ]
+    },
+    {
+      "task": "T6",
+      "status": "PASS",
+      "tables_recomputed_and_compared": [
+        {
+          "table": "tasks/T6/expected/T6_model_task_applicability_matrix.csv",
+          "rows": 77
+        },
+        {
+          "table": "tasks/T6/expected/T6_coverage_and_failure_evidence.csv",
+          "rows": 11
+        }
+      ]
+    },
+    {
+      "task": "T7",
+      "status": "PASS",
+      "tables_recomputed_and_compared": [
+        {
+          "table": "tasks/T7/expected/T7_unique_design_model_group_scores.csv",
+          "rows": 78
+        },
+        {
+          "table": "tasks/T7/expected/T7_unique_design_random_group_scores.csv",
+          "rows": 39
+        },
+        {
+          "table": "tasks/T7/expected/T7_unique_design_random_metric_distribution.csv",
+          "rows": 1000
+        },
+        {
+          "table": "tasks/T7/expected/T7_unique_design_oracle_group_scores.csv",
+          "rows": 39
+        }
+      ]
+    },
+    {
+      "task": "calibration",
+      "status": "PASS",
+      "tables_recomputed_and_compared": [
+        {
+          "table": "tasks/revision/06_R2.5/results/calibration_metrics.csv",
+          "rows": 13
+        },
+        {
+          "table": "tasks/revision/06_R2.5/results/calibration_bins.csv",
+          "rows": 130
+        },
+        {
+          "table": "tasks/revision/06_R2.5/results/fold_fit_parameters.csv",
+          "rows": 60
+        }
+      ]
+    },
+    {
+      "task": "common",
+      "status": "PASS",
+      "tables_recomputed_and_compared": [
+        {
+          "table": "tasks/revision/03_R2.2/results/common_position_metrics.csv",
+          "rows": 159
+        },
+        {
+          "table": "tasks/revision/03_R2.2/results/common_product_metrics.csv",
+          "rows": 48
+        },
+        {
+          "table": "tasks/revision/03_R2.2/results/common_position_paired_differences.csv",
+          "rows": 144
+        },
+        {
+          "table": "tasks/revision/03_R2.2/results/common_product_paired_differences.csv",
+          "rows": 36
+        }
+      ]
+    },
+    {
+      "task": "cross-source",
+      "status": "PASS",
+      "tables_recomputed_and_compared": [
+        {
+          "table": "tasks/revision/02_R2.1/external_validation/results/external_association_metrics.csv",
+          "rows": 12
+        },
+        {
+          "table": "tasks/revision/02_R2.1/external_validation/results/external_paired_association_differences.csv",
+          "rows": 18
+        }
+      ]
+    },
+    {
+      "task": "external-endpoint",
+      "status": "PASS",
+      "tables_recomputed_and_compared": [
+        {
+          "table": "tasks/revision/02_R2.1/endpoint_correction/CRISPRon_training_head_endpoint_identity_by_source.csv",
+          "rows": 8
+        },
+        {
+          "table": "tasks/revision/02_R2.1/endpoint_correction/Marquart_ABE_compatible_inference_panel.csv",
+          "rows": 127
+        }
+      ]
+    },
+    {
+      "task": "missing",
+      "status": "PASS",
+      "tables_recomputed_and_compared": [
+        {
+          "table": "tasks/revision/07_R2.6/results/equal_target_missing_policy_sensitivity.csv",
+          "rows": 9
+        }
+      ]
+    },
+    {
+      "task": "neighbors",
+      "status": "PASS",
+      "tables_recomputed_and_compared": [
+        {
+          "table": "tasks/revision/02_R2.1/overlap_audit/CRISPRon_guide_neighbor_summary.csv",
+          "rows": 36
+        },
+        {
+          "table": "tasks/revision/02_R2.1/overlap_audit/T1_neighborhood_exclusion_associations.csv",
+          "rows": 12
+        }
+      ]
+    },
+    {
+      "task": "paired",
+      "status": "PASS",
+      "tables_recomputed_and_compared": [
+        {
+          "table": "tasks/revision/09_R2.8/results/model_paired_comparison.csv",
+          "rows": 4
+        },
+        {
+          "table": "tasks/revision/09_R2.8/results/shared_guide_subsampling_summary.csv",
+          "rows": 4
+        }
+      ]
+    },
+    {
+      "task": "random",
+      "status": "PASS",
+      "tables_recomputed_and_compared": [
+        {
+          "table": "tasks/revision/04_R2.3/results/random_position_metrics.csv",
+          "rows": 42
+        },
+        {
+          "table": "tasks/revision/04_R2.3/results/random_product_metrics.csv",
+          "rows": 84
+        },
+        {
+          "table": "tasks/revision/04_R2.3/results/random_position_paired_differences.csv",
+          "rows": 126
+        },
+        {
+          "table": "tasks/revision/04_R2.3/results/random_product_paired_differences.csv",
+          "rows": 156
+        }
+      ]
+    },
+    {
+      "task": "scalar-followups",
+      "status": "PASS",
+      "tables_recomputed_and_compared": [
+        {
+          "table": "tasks/revision/14_R3.1/results/all_model_oof_calibration_bins.csv",
+          "rows": 40
+        },
+        {
+          "table": "tasks/revision/15_R3.2/results/positive_subset_correlations.csv",
+          "rows": 12
+        },
+        {
+          "table": "tasks/revision/15_R3.2/results/near_zero_positive_calls.csv",
+          "rows": 10
+        },
+        {
+          "table": "tasks/revision/16_R3.2.1/results/pairwise_model_agreement.csv",
+          "rows": 6
+        }
+      ]
+    },
+    {
+      "task": "shortlist",
+      "status": "PASS",
+      "tables_recomputed_and_compared": [
+        {
+          "table": "tasks/revision/08_R2.7/results/shortlist_summary.csv",
+          "rows": 24
+        },
+        {
+          "table": "tasks/revision/08_R2.7/results/shortlist_per_group.csv",
+          "rows": 234
+        },
+        {
+          "table": "tasks/revision/08_R2.7/results/shortlist_paired_contrasts.csv",
+          "rows": 32
+        },
+        {
+          "table": "tasks/revision/09_R2.8/results/source_stratified_metrics.csv",
+          "rows": 12
+        },
+        {
+          "table": "tasks/revision/09_R2.8/results/editor_class_stratified_metrics.csv",
+          "rows": 12
+        },
+        {
+          "table": "tasks/revision/09_R2.8/results/shared_guide_subsampling.csv",
+          "rows": 800
+        }
+      ]
+    },
+    {
+      "task": "shuffle",
+      "status": "PASS",
+      "tables_recomputed_and_compared": [
+        {
+          "table": "tasks/revision/20_R3.6/results/shuffle_discrimination.csv",
+          "rows": 12
+        },
+        {
+          "table": "tasks/revision/20_R3.6/results/original_score_replay.csv",
+          "rows": 4
+        },
+        {
+          "table": "tasks/revision/20_R3.6/results/execution_coverage.csv",
+          "rows": 4
+        }
+      ]
+    },
+    {
+      "task": "source-audit",
+      "status": "PASS",
+      "tables_recomputed_and_compared": [
+        {
+          "table": "tasks/revision/10_R2.9/results/catalog_source_measurement_inventory.csv",
+          "rows": 6
+        },
+        {
+          "table": "tasks/revision/10_R2.9/results/numerical_scale_audit.csv",
+          "rows": 9
+        }
+      ]
+    },
+    {
+      "task": "substitution",
+      "status": "PASS",
+      "tables_recomputed_and_compared": [
+        {
+          "table": "tasks/revision/17_R3.3/results/substitution_sensitivity.csv",
+          "rows": 8
+        },
+        {
+          "table": "tasks/revision/17_R3.3/results/paired_sensitivity_differences.csv",
+          "rows": 6
+        },
+        {
+          "table": "tasks/revision/17_R3.3/results/execution_coverage.csv",
+          "rows": 4
+        }
+      ]
+    }
+  ],
+  "T7_pre_aggregation": {
+    "original_observations": 503545,
+    "unique_design_group_instances": 438768,
+    "model_score_rows": 877536,
+    "status": "PASS"
+  },
+  "native_deployment_smoke": {
+    "status": "PASS",
+    "model_native_scores": {
+      "forecast_be": -0.20647064254250963,
+      "deepbaseeditor": 0.1881799399852753
+    }
+  },
+  "matrix": {
+    "observations": 1147701,
+    "exact_input_files": 61,
+    "reference": "data/matrix_source_files.csv"
+  },
+  "analysis_environment": {
+    "python": "3.10.13",
+    "requirements": "requirements-analysis.txt"
+  }
+}

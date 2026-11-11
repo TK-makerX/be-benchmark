@@ -1,0 +1,10 @@
+name: crispronbe
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - python=3.10
+  - tensorflow=2.10.0
+  - biopython=1.79
+  - viennarna=2.5.1
+  - pandas=2.2.2

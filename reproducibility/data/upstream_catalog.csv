@@ -1,0 +1,41 @@
+dataset_id,category,title,size_bytes,download_page_or_api
+BEHIVE_EFF_FIGSHARE,processed_figshare,BE-Hive processed editing efficiency data,218657519,https://figshare.com/articles/dataset/Processed_editing_efficiency_data/10673816
+BEHIVE_BYST_FIGSHARE,processed_figshare,BE-Hive processed bystander editing data,807376072,https://figshare.com/articles/dataset/Processed_bystander_editing_data/10678097
+FORECASTBE_FIGSHARE,processed_figshare,FORECasT-BE processed base editor screen data,271728940,https://figshare.com/articles/dataset/Processed_base_editor_screen_data/14460039
+CGBE_SMART_PROCESSED,processed_figshare,CGBE / BE-SMART processed editing efficiency data,51185603,https://figshare.com/articles/dataset/CGBE_-_processed_editing_efficiency_data/12275654
+BEDICT2_SUPP,supplementary_file,BEDICT2.0 supplementary information PDF,2752429,https://static-content.springer.com/esm/art%3A10.1186%2Fs13059-025-03586-7/MediaObjects/13059_2025_3586_MOESM1_ESM.pdf
+BEDICT2_SUPP,supplementary_file,BEDICT2.0 Additional file 2,1460525,https://static-content.springer.com/esm/art%3A10.1186%2Fs13059-025-03586-7/MediaObjects/13059_2025_3586_MOESM2_ESM.xlsx
+BEDICT2_SUPP,supplementary_file,BEDICT2.0 Additional file 3,13854,https://static-content.springer.com/esm/art%3A10.1186%2Fs13059-025-03586-7/MediaObjects/13059_2025_3586_MOESM3_ESM.xlsx
+BEDICT2_SUPP,supplementary_file,BEDICT2.0 Additional file 4 / source data,38849281,https://static-content.springer.com/esm/art%3A10.1186%2Fs13059-025-03586-7/MediaObjects/13059_2025_3586_MOESM4_ESM.xlsx
+BEDICT_NATCOMM_SUPP,supplementary_file,BE-DICT supplementary information,5229604,https://static-content.springer.com/esm/art%3A10.1038%2Fs41467-021-25375-z/MediaObjects/41467_2021_25375_MOESM1_ESM.pdf
+BEDICT_NATCOMM_SUPP,supplementary_file,BE-DICT Supplementary Data 1,12956341,https://static-content.springer.com/esm/art%3A10.1038%2Fs41467-021-25375-z/MediaObjects/41467_2021_25375_MOESM2_ESM.xlsx
+BEDICT_NATCOMM_SUPP,supplementary_file,BE-DICT Supplementary Data 2,21918,https://static-content.springer.com/esm/art%3A10.1038%2Fs41467-021-25375-z/MediaObjects/41467_2021_25375_MOESM3_ESM.xlsx
+BEDICT_NATCOMM_SUPP,supplementary_file,BE-DICT Supplementary Data 3,14196535,https://static-content.springer.com/esm/art%3A10.1038%2Fs41467-021-25375-z/MediaObjects/41467_2021_25375_MOESM4_ESM.xlsx
+BEDICT_NATCOMM_SUPP,supplementary_file,BE-DICT source data,10697704,https://static-content.springer.com/esm/art%3A10.1038%2Fs41467-021-25375-z/MediaObjects/41467_2021_25375_MOESM8_ESM.xlsx
+CRISPRONBE_SUPP,supplementary_file,CRISPRon-BE Supplementary Data 1,14611852,https://static-content.springer.com/esm/art%3A10.1038%2Fs41467-025-65200-5/MediaObjects/41467_2025_65200_MOESM3_ESM.xlsx
+CRISPRONBE_SUPP,supplementary_file,CRISPRon-BE Supplementary Data 2,941023,https://static-content.springer.com/esm/art%3A10.1038%2Fs41467-025-65200-5/MediaObjects/41467_2025_65200_MOESM4_ESM.xlsx
+CRISPRONBE_SUPP,supplementary_file,CRISPRon-BE Supplementary Data 3,258824,https://static-content.springer.com/esm/art%3A10.1038%2Fs41467-025-65200-5/MediaObjects/41467_2025_65200_MOESM5_ESM.xlsx
+CRISPRONBE_SUPP,supplementary_file,CRISPRon-BE source data,7497599,https://static-content.springer.com/esm/art%3A10.1038%2Fs41467-025-65200-5/MediaObjects/41467_2025_65200_MOESM8_ESM.xlsx
+BEGUIDER_NEAR_PAMLESS,supplementary_file,BEguider Supplementary Data,23945614,https://static-content.springer.com/esm/art%3A10.1038%2Fs42003-024-07078-5/MediaObjects/42003_2024_7078_MOESM3_ESM.xlsx
+CGBE_SMART_SUPP,supplementary_file,CGBE/BE-SMART Supplementary Data 1,23048,https://static-content.springer.com/esm/art%3A10.1038%2Fs41467-021-25217-y/MediaObjects/41467_2021_25217_MOESM5_ESM.xlsx
+CGBE_SMART_SUPP,supplementary_file,CGBE/BE-SMART Supplementary Data 2,39643993,https://static-content.springer.com/esm/art%3A10.1038%2Fs41467-021-25217-y/MediaObjects/41467_2021_25217_MOESM6_ESM.xlsx
+BE_ENDO_SUPP,supplementary_file,BE_Endo Supplementary Data,1385759,https://static-content.springer.com/esm/art%3A10.1038%2Fs41421-023-00624-1/MediaObjects/41421_2023_624_MOESM2_ESM.xlsx
+BE_ENDO_SUPP,supplementary_file,BE_Endo source data,1324535,https://static-content.springer.com/esm/art%3A10.1038%2Fs41421-023-00624-1/MediaObjects/41421_2023_624_MOESM3_ESM.xlsx
+BEGUIDER_GITHUB_DATA,github_file_or_directory,BEguider GitHub data directory,,https://github.com/Wangxiaoyue-lab/BEguider/tree/main/data
+BEGUIDER_GITHUB_DATA,github_file_or_directory,BEguider a_alt_anno.csv,1860493,https://raw.githubusercontent.com/Wangxiaoyue-lab/BEguider/main/data/a_alt_anno.csv
+BEGUIDER_GITHUB_DATA,github_file_or_directory,BEguider a_ref_anno.csv,5759092,https://raw.githubusercontent.com/Wangxiaoyue-lab/BEguider/main/data/a_ref_anno.csv
+BEGUIDER_GITHUB_DATA,github_file_or_directory,BEguider c_alt_anno.csv,5679519,https://raw.githubusercontent.com/Wangxiaoyue-lab/BEguider/main/data/c_alt_anno.csv
+BEGUIDER_GITHUB_DATA,github_file_or_directory,BEguider c_ref_anno.csv,1758812,https://raw.githubusercontent.com/Wangxiaoyue-lab/BEguider/main/data/c_ref_anno.csv
+CRISPRONBE_GITHUB_DATA,github_file_or_directory,CRISPRon-BE model development data directory,,https://github.com/RTH-tools/crispron-BE/tree/main/data_for_model_development_V1.0
+BE_ENDO_GITHUB_MODELS,github_file_or_directory,BE_Endo model_data_endo directory,,https://github.com/zhaodalv/BE_Endo/tree/master/model_data_endo
+BEDATAHIVE_API,api_endpoint,BE-dataHIVE API documentation,,https://be-datahive.com/documentation.html
+BEDATAHIVE_API,api_endpoint,BE-dataHIVE studies endpoint,,https://be-server.herokuapp.com/studies
+BEDATAHIVE_API,api_endpoint,BE-dataHIVE efficiency endpoint,,https://be-server.herokuapp.com/efficiency
+BEDATAHIVE_API,api_endpoint,BE-dataHIVE bystander endpoint,,https://be-server.herokuapp.com/bystander
+BEDICT2_RAW_PRJNA1107439,raw_large_sequencing,BEDICT2.0 raw sequencing,129198528256,https://www.ebi.ac.uk/ena/browser/view/PRJNA1107439
+CRISPRONBE_RAW_PRJNA1321836,raw_large_sequencing,CRISPRon-BE raw sequencing,17096373959,https://www.ebi.ac.uk/ena/browser/view/PRJNA1321836
+BE_ENDO_RAW_PRJNA885970,raw_large_sequencing,BE_Endo raw sequencing,269617687899,https://www.ebi.ac.uk/ena/browser/view/PRJNA885970
+BEGUIDER_RAW_PRJNA1046210,raw_large_sequencing,BEguider raw sequencing,195678797950,https://www.ebi.ac.uk/ena/browser/view/PRJNA1046210
+BEDICT_RAW_PRJNA735610,raw_large_sequencing,BE-DICT 2021 raw sequencing,57453084764,https://www.ebi.ac.uk/ena/browser/view/PRJNA735610
+FORECASTBE_RAW_PRJEB12405,raw_large_sequencing,FORECasT-BE raw sequencing,1140181047074,https://www.ebi.ac.uk/ena/browser/view/PRJEB12405
+CGBE_SMART_RAW_PRJNA749814,raw_large_sequencing,CGBE/BE-SMART raw sequencing,1315725389609,https://www.ebi.ac.uk/ena/browser/view/PRJNA749814

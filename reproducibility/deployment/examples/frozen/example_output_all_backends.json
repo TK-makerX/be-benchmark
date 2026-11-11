@@ -1,0 +1,788 @@
+﻿{
+  "system_name": "BE-Benchmark-informed prediction router",
+  "system_version": "0.4.0-web-report-mvp",
+  "input": {
+    "editor": "ABE8e",
+    "editor_family": "ABE",
+    "requested_task": "auto",
+    "selected_tasks": [
+      "scalar_efficiency",
+      "high_low_screening",
+      "outcome_profile",
+      "position_profile",
+      "design_recommendation"
+    ],
+    "cell_context": "",
+    "cas_variant": "SpRY",
+    "reference_outcome": "GGGGAAAAGCCCCCGGGGGTTTTTGGGAAA"
+  },
+  "sequence_assessment": {
+    "raw_sequence": "GGGGAAAAACCCCCGGGGGTTTTTGGGAAA",
+    "sequence": "GGGGAAAAACCCCCGGGGGTTTTTGGGAAA",
+    "valid_dna": true,
+    "invalid_characters": [],
+    "length": 30,
+    "inferred_input_type": "30nt_model_window",
+    "pam": "GGG",
+    "is_ngg_like": true,
+    "abe_window_bases": "AACCC",
+    "cbe_window_bases": "AACCC",
+    "abe_candidate_positions_1based": [
+      4,
+      5
+    ],
+    "cbe_candidate_positions_1based": [
+      6,
+      7,
+      8
+    ],
+    "warnings": []
+  },
+  "routes": [
+    {
+      "model_id": "crispron_be",
+      "display_name": "CRISPRon-BE",
+      "integration_status": "locally_reproduced_hybrid_windows_wsl_helper",
+      "runtime_family": "TensorFlow 2.10 + project-local WSL RNAfold helper",
+      "license_reuse_note": "Business Source License; local benchmark use is recorded, production/hosted-service reuse needs license review.",
+      "local_path": "E:\\AIselect\\BEs\\CRISPRon-BE",
+      "task_routes": [
+        {
+          "task": "scalar_efficiency",
+          "task_label": "Scalar editing efficiency",
+          "role": "primary scalar-efficiency backend",
+          "confidence_tier": "high",
+          "benchmark_basis": "T1, T4, T6",
+          "benchmark_summary": "T1 common-core Spearman about 0.51; T4 high/low AUROC about 0.86.",
+          "warnings": []
+        },
+        {
+          "task": "high_low_screening",
+          "task_label": "High-vs-low screening",
+          "role": "primary screening backend",
+          "confidence_tier": "high",
+          "benchmark_basis": "T4",
+          "benchmark_summary": "Best clean high-vs-low classifier among the formal T4 scalar models.",
+          "warnings": []
+        },
+        {
+          "task": "outcome_profile",
+          "task_label": "Edited-product / bystander profile",
+          "role": "profile-capable backend",
+          "confidence_tier": "moderate",
+          "benchmark_basis": "T2, T6",
+          "benchmark_summary": "T2 external normalized profile evidence; output should be interpreted as profile/rank evidence.",
+          "warnings": []
+        },
+        {
+          "task": "position_profile",
+          "task_label": "Position-level editing profile",
+          "role": "external position-profile backend",
+          "confidence_tier": "moderate",
+          "benchmark_basis": "T3, T6",
+          "benchmark_summary": "T3 evidence exists but position coverage was low relative to BE-Hive.",
+          "warnings": []
+        },
+        {
+          "task": "design_recommendation",
+          "task_label": "Design recommendation / top-k ranking",
+          "role": "top-k design-ranking backend",
+          "confidence_tier": "moderate",
+          "benchmark_basis": "T7 + T7 random/oracle baseline",
+          "benchmark_summary": "T7 NDCG@10 0.327 and enrichment@10 2.61 versus random 1.01; top-1 best-hit remained 0.",
+          "warnings": []
+        }
+      ],
+      "system_use": "strong research backend with license/deployment caveats",
+      "major_caveat": "Slowest local timing among controlled roles and no prediction when the relevant target base is absent from the editing window."
+    },
+    {
+      "model_id": "behive_bystander",
+      "display_name": "BE-Hive bystander",
+      "integration_status": "locally_reproduced_windows_native",
+      "runtime_family": "modern CPU PyTorch",
+      "license_reuse_note": "External web terms unresolved from local source.",
+      "local_path": "E:\\AIselect\\BEs\\BE-Hive-bystander",
+      "task_routes": [
+        {
+          "task": "outcome_profile",
+          "task_label": "Edited-product / bystander profile",
+          "role": "source-associated profile backend",
+          "confidence_tier": "moderate_with_input_caveat",
+          "benchmark_basis": "T2, T6",
+          "benchmark_summary": "Strong source-associated bystander/product profile evidence.",
+          "warnings": [
+            "Input type 30nt_model_window may need adapter-specific preprocessing."
+          ]
+        },
+        {
+          "task": "position_profile",
+          "task_label": "Position-level editing profile",
+          "role": "complete calibrated source-associated position backend",
+          "confidence_tier": "moderate_with_input_caveat",
+          "benchmark_basis": "T3, T6",
+          "benchmark_summary": "T3 covered all evaluated positions with lowest calibrated-rate error among comparable conditional-rate models.",
+          "warnings": [
+            "Input type 30nt_model_window may need adapter-specific preprocessing."
+          ]
+        }
+      ],
+      "system_use": "strong source-associated profile backend",
+      "major_caveat": "Native output is conditional bystander/product mass, not direct scalar activity."
+    },
+    {
+      "model_id": "bedict_v2",
+      "display_name": "BEDICT-V2",
+      "integration_status": "locally_reproduced_windows_native",
+      "runtime_family": "modern CPU PyTorch",
+      "license_reuse_note": "MIT license file present locally.",
+      "local_path": "E:\\AIselect\\BEs\\BEDICT-V2",
+      "task_routes": [
+        {
+          "task": "outcome_profile",
+          "task_label": "Edited-product / bystander profile",
+          "role": "profile backend",
+          "confidence_tier": "moderate",
+          "benchmark_basis": "T2, T6",
+          "benchmark_summary": "T2 profile evidence exists; useful for editor-context-aware workflows.",
+          "warnings": []
+        },
+        {
+          "task": "position_profile",
+          "task_label": "Position-level editing profile",
+          "role": "restricted proxy position backend",
+          "confidence_tier": "restricted",
+          "benchmark_basis": "T3, T6",
+          "benchmark_summary": "T3 proxy evidence exists with restricted target counts.",
+          "warnings": []
+        }
+      ],
+      "system_use": "low-friction profile/backend candidate",
+      "major_caveat": "Formal T1 scalar common-core route was not locked; use mainly for profile/outcome contexts unless scalar adapter is added."
+    },
+    {
+      "model_id": "deepbe",
+      "display_name": "DeepBE",
+      "integration_status": "locally_reproduced_windows_native_compatibility_runner",
+      "runtime_family": "TensorFlow 2.10 compatibility",
+      "license_reuse_note": "Model license unresolved from local source; local benchmark reuse only unless terms are reviewed.",
+      "local_path": "E:\\AIselect\\BEs\\DeepBE",
+      "task_routes": [
+        {
+          "task": "scalar_efficiency",
+          "task_label": "Scalar editing efficiency",
+          "role": "scalar-efficiency backend",
+          "confidence_tier": "moderate",
+          "benchmark_basis": "T1, T4, T6",
+          "benchmark_summary": "Formal T1/T4 common-core evidence exists.",
+          "warnings": []
+        },
+        {
+          "task": "high_low_screening",
+          "task_label": "High-vs-low screening",
+          "role": "screening backend",
+          "confidence_tier": "moderate",
+          "benchmark_basis": "T4",
+          "benchmark_summary": "T4 formal classifier evidence exists.",
+          "warnings": []
+        },
+        {
+          "task": "outcome_profile",
+          "task_label": "Edited-product / bystander profile",
+          "role": "proxy profile backend",
+          "confidence_tier": "restricted",
+          "benchmark_basis": "T2, T3",
+          "benchmark_summary": "Useful as restricted/proxy evidence rather than a universal profile model.",
+          "warnings": []
+        },
+        {
+          "task": "position_profile",
+          "task_label": "Position-level editing profile",
+          "role": "restricted proxy position backend",
+          "confidence_tier": "restricted",
+          "benchmark_basis": "T3",
+          "benchmark_summary": "High rank agreement in restricted coverage; avoid absolute-rate overclaiming.",
+          "warnings": []
+        }
+      ],
+      "system_use": "research backend with reuse caveat",
+      "major_caveat": "Current adapter is minimal ABE-focused; broader editor/PAM support needs more wrappers."
+    },
+    {
+      "model_id": "deepbaseeditor",
+      "display_name": "DeepBaseEditor",
+      "integration_status": "locally_reproduced_compatibility_runner",
+      "runtime_family": "Python2/TF1 upstream via TensorFlow 2 compatibility runner",
+      "license_reuse_note": "MIT evidence for relevant subdirectories; verify unlicensed paired assets before redistribution.",
+      "local_path": "E:\\AIselect\\BEs\\DeepBaseEditor-Paired-Library",
+      "task_routes": [
+        {
+          "task": "scalar_efficiency",
+          "task_label": "Scalar editing efficiency",
+          "role": "scalar-efficiency backend",
+          "confidence_tier": "moderate",
+          "benchmark_basis": "T1, T4, T6",
+          "benchmark_summary": "Formal T1/T4 evidence exists.",
+          "warnings": []
+        },
+        {
+          "task": "high_low_screening",
+          "task_label": "High-vs-low screening",
+          "role": "screening backend",
+          "confidence_tier": "moderate",
+          "benchmark_basis": "T4",
+          "benchmark_summary": "T4 formal classifier evidence exists.",
+          "warnings": []
+        },
+        {
+          "task": "position_profile",
+          "task_label": "Position-level editing profile",
+          "role": "exploratory supplementary position backend",
+          "confidence_tier": "research_only",
+          "benchmark_basis": "T3",
+          "benchmark_summary": "Exploratory supplementary evidence only.",
+          "warnings": []
+        }
+      ],
+      "system_use": "research backend with legacy-code caveat",
+      "major_caveat": "Current adapter covers historical ABE efficiency; other modules require additional wrappers."
+    },
+    {
+      "model_id": "forecast_be",
+      "display_name": "FORECasT-BE",
+      "integration_status": "locally_reproduced_windows_native",
+      "runtime_family": "sklearn/joblib",
+      "license_reuse_note": "MIT license file present locally; verify model-asset terms if redistributed.",
+      "local_path": "E:\\AIselect\\BEs\\FORECasT-BE",
+      "task_routes": [
+        {
+          "task": "scalar_efficiency",
+          "task_label": "Scalar editing efficiency",
+          "role": "scalar-efficiency backend",
+          "confidence_tier": "moderate",
+          "benchmark_basis": "T1, T4, T6",
+          "benchmark_summary": "T1/T4 formal evidence exists, but lower scalar performance than CRISPRon-BE.",
+          "warnings": []
+        },
+        {
+          "task": "high_low_screening",
+          "task_label": "High-vs-low screening",
+          "role": "screening backend",
+          "confidence_tier": "moderate",
+          "benchmark_basis": "T4",
+          "benchmark_summary": "T4 formal classifier evidence exists.",
+          "warnings": []
+        },
+        {
+          "task": "position_profile",
+          "task_label": "Position-level editing profile",
+          "role": "rank-oriented position-profile backend",
+          "confidence_tier": "moderate",
+          "benchmark_basis": "T2, T3, T6",
+          "benchmark_summary": "Useful rank/position evidence; avoid overclaiming calibrated absolute rates.",
+          "warnings": []
+        },
+        {
+          "task": "design_recommendation",
+          "task_label": "Design recommendation / top-k ranking",
+          "role": "top-k design-ranking backend",
+          "confidence_tier": "moderate",
+          "benchmark_basis": "T7 + T7 random/oracle baseline",
+          "benchmark_summary": "T7 enrichment@10 2.74 versus random 1.01, but top-1 and top-k best-hit remained weak.",
+          "warnings": []
+        }
+      ],
+      "system_use": "low-friction local backend",
+      "major_caveat": "Native scores are safest for ranking/position-profile use unless calibration assumptions are explicit."
+    },
+    {
+      "model_id": "behive_efficiency",
+      "display_name": "BE-Hive efficiency",
+      "integration_status": "locally_reproduced_with_legacy_environment",
+      "runtime_family": "legacy sklearn/Python 3.7",
+      "license_reuse_note": "External web terms unresolved from local source.",
+      "local_path": "E:\\AIselect\\BEs\\BE-Hive-efficiency",
+      "task_routes": [
+        {
+          "task": "scalar_efficiency",
+          "task_label": "Scalar editing efficiency",
+          "role": "source-associated scalar backend",
+          "confidence_tier": "restricted",
+          "benchmark_basis": "T1, T6",
+          "benchmark_summary": "Source-associated evidence exists but external/common-core coverage and calibration are limited.",
+          "warnings": [
+            "Input type 30nt_model_window may need adapter-specific preprocessing."
+          ]
+        },
+        {
+          "task": "high_low_screening",
+          "task_label": "High-vs-low screening",
+          "role": "restricted screening backend",
+          "confidence_tier": "restricted",
+          "benchmark_basis": "T4",
+          "benchmark_summary": "T4 usable coverage was smaller than other formal scalar models.",
+          "warnings": [
+            "Input type 30nt_model_window may need adapter-specific preprocessing."
+          ]
+        }
+      ],
+      "system_use": "source-associated/local benchmark backend only",
+      "major_caveat": "Requires BE-Hive-native 50nt window and calibration context; external common-core coverage was limited."
+    },
+    {
+      "model_id": "be_endo",
+      "display_name": "BE_Endo sequence-only",
+      "integration_status": "locally_reproduced_sequence_only",
+      "runtime_family": "TensorFlow 2.10 compatibility",
+      "license_reuse_note": "No local license found; local benchmark reuse only unless upstream terms are reviewed.",
+      "local_path": "E:\\AIselect\\BEs\\BE_Endo",
+      "task_routes": [
+        {
+          "task": "outcome_profile",
+          "task_label": "Edited-product / bystander profile",
+          "role": "position/profile proxy backend",
+          "confidence_tier": "restricted",
+          "benchmark_basis": "T2, T6",
+          "benchmark_summary": "Completed T2 position/profile evidence in sequence-only mode.",
+          "warnings": []
+        },
+        {
+          "task": "position_profile",
+          "task_label": "Position-level editing profile",
+          "role": "rank-oriented position backend",
+          "confidence_tier": "restricted",
+          "benchmark_basis": "T3, T6",
+          "benchmark_summary": "T3 rank evidence exists; not a full endogenous mode claim.",
+          "warnings": []
+        }
+      ],
+      "system_use": "sequence-only research backend",
+      "major_caveat": "Full endogenous-factor mode still needs external resources; current route is sequence-only."
+    },
+    {
+      "model_id": "yachie_base_editing_prediction",
+      "display_name": "Yachie base-editing prediction",
+      "integration_status": "locally_reproduced_windows_native",
+      "runtime_family": "lightweight Python probability model",
+      "license_reuse_note": "No local license found; local benchmark reuse only unless upstream terms are reviewed.",
+      "local_path": "E:\\AIselect\\BEs\\Yachie-base-editing-prediction",
+      "task_routes": [
+        {
+          "task": "outcome_profile",
+          "task_label": "Edited-product / bystander profile",
+          "role": "proxy outcome-pattern comparator",
+          "confidence_tier": "restricted",
+          "benchmark_basis": "T2, T6",
+          "benchmark_summary": "T2 proxy evidence exists; not a calibrated neural predictor.",
+          "warnings": []
+        },
+        {
+          "task": "position_profile",
+          "task_label": "Position-level editing profile",
+          "role": "proxy position comparator",
+          "confidence_tier": "restricted",
+          "benchmark_basis": "T3, T6",
+          "benchmark_summary": "Useful restricted proxy/rank comparator.",
+          "warnings": []
+        }
+      ],
+      "system_use": "historical probabilistic comparator",
+      "major_caveat": "Not a modern pretrained neural predictor; current use is proxy/candidate-score context."
+    },
+    {
+      "model_id": "epcnnbe",
+      "display_name": "EPCNNBE",
+      "integration_status": "locally_reproduced_windows_native",
+      "runtime_family": "modern CPU PyTorch",
+      "license_reuse_note": "No local license found; local benchmark reuse only unless upstream terms are reviewed.",
+      "local_path": "E:\\AIselect\\BEs\\EPCNNBE",
+      "task_routes": [
+        {
+          "task": "position_profile",
+          "task_label": "Position-level editing profile",
+          "role": "exploratory supplementary backend",
+          "confidence_tier": "research_only",
+          "benchmark_basis": "T3, T6",
+          "benchmark_summary": "Exploratory T3 evidence only.",
+          "warnings": []
+        }
+      ],
+      "system_use": "exploratory backend",
+      "major_caveat": "Not included in T1 v6 or T2_expand locked main evidence; T3 exploratory only."
+    }
+  ],
+  "global_interpretation": "This MVP routes inputs to locally reproduced base-editor predictors and explains benchmark support. It does not fabricate numeric predictions when a model adapter has not been invoked. Performance claims must remain task-specific.",
+  "canonical_evidence": {
+    "T1": "E:\\AIselect\\BEs\\benchmark_core\\formal_results\\T1_v6_common_core_abe_5model_full30000",
+    "T2": "E:\\AIselect\\BEs\\benchmark_core\\formal_results\\T2_expand_v0",
+    "T3": "E:\\AIselect\\BEs\\benchmark_core\\formal_results\\T3_position_profile_v1",
+    "T4": "E:\\AIselect\\BEs\\benchmark_core\\formal_results\\T4_high_low_classification_v1_corrected_labels",
+    "T5": "E:\\AIselect\\BEs\\benchmark_core\\formal_results\\T5_metadata_first_generalization_v0",
+    "T6": "E:\\AIselect\\BEs\\benchmark_core\\formal_results\\T6_reproducibility_applicability_v0",
+    "T7": "E:\\AIselect\\BEs\\benchmark_core\\formal_results\\T7_editor_design_recommendation_final_v1",
+    "T7_baseline": "E:\\AIselect\\BEs\\benchmark_core\\formal_results\\T7_editor_design_recommendation_baseline_v1"
+  },
+  "model_outputs": [
+    {
+      "model_id": "forecast_be",
+      "display_name": "FORECasT-BE",
+      "status": "completed",
+      "editor": "ABE",
+      "protospacer_20nt": "AAAAACCCCCGGGGGTTTTT",
+      "prediction_type": "native_total_score_and_position_scores",
+      "predicted_efficiency_score": -0.20647064254250963,
+      "score_scale": "FORECasT-BE native score; safest as rank/relative score unless calibration parameters are supplied.",
+      "position_scores": [
+        {
+          "position": 3,
+          "score": -0.7359730509048924
+        },
+        {
+          "position": 4,
+          "score": -0.6148004998309266
+        },
+        {
+          "position": 5,
+          "score": -0.45735255602044733
+        },
+        {
+          "position": 6,
+          "score": null
+        },
+        {
+          "position": 7,
+          "score": null
+        },
+        {
+          "position": 8,
+          "score": null
+        },
+        {
+          "position": 9,
+          "score": null
+        },
+        {
+          "position": 10,
+          "score": null
+        }
+      ],
+      "benchmark_interpretation": "Use with T1/T4 scalar and T3/T7 rank-style caveats from the benchmark.",
+      "stderr_note": "Loading models for ABE\nLoading models for CBE\nFinished loading models\n"
+    },
+    {
+      "model_id": "deepbaseeditor",
+      "display_name": "DeepBaseEditor ABE_Efficiency",
+      "status": "completed",
+      "editor": "ABE",
+      "target_30nt": "GGGGAAAAACCCCCGGGGGTTTTTGGGAAA",
+      "prediction_type": "ABE_scalar_efficiency",
+      "raw_activity_score_percent": 18.81799399852753,
+      "predicted_efficiency_score": 0.1881799399852753,
+      "score_scale": "DeepBaseEditor historical ABE_Efficiency output; raw script reports 100*model_output, converted score is raw/100.",
+      "benchmark_interpretation": "Use as ABE scalar-efficiency backend with T1/T4/T6 caveats; legacy compatibility runner.",
+      "stderr_note": "tream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cufft64_10.dll'; dlerror: cufft64_10.dll not found\n2026-07-03 10:41:30.792413: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'curand64_10.dll'; dlerror: curand64_10.dll not found\n2026-07-03 10:41:30.793047: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cusolver64_11.dll'; dlerror: cusolver64_11.dll not found\n2026-07-03 10:41:30.793805: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cusparse64_11.dll'; dlerror: cusparse64_11.dll not found\n2026-07-03 10:41:30.794325: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cudnn64_8.dll'; dlerror: cudnn64_8.dll not found\n2026-07-03 10:41:30.794342: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1934] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.\nSkipping registering GPU devices...\n2026-07-03 10:41:30.897993: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:354] MLIR V1 optimization pass is not enabled\nE:\\AIselect\\BEs\\DeepBaseEditor-Paired-Library\\repo\\DeepBaseEditor\\ABE_Efficiency\\TEST_ABE_Efficiency.py:50: UserWarning: `tf.layers.dropout` is deprecated and will be removed in a future version. Please use `tf.keras.layers.Dropout` instead.\n  out_layer = tf.layers.dropout(tf.nn.relu(out_layer), 0.3, self.is_training)\nE:\\AIselect\\BEs\\DeepBaseEditor-Paired-Library\\repo\\DeepBaseEditor\\ABE_Efficiency\\TEST_ABE_Efficiency.py:73: UserWarning: `tf.layers.dropout` is deprecated and will be removed in a future version. Please use `tf.keras.layers.Dropout` instead.\n  L_fcl1_drop  = tf.layers.dropout(L_fcl1, 0.3, self.is_training)\n"
+    },
+    {
+      "model_id": "deepbe",
+      "status": "completed",
+      "prediction_count": 8,
+      "skipped_count": 0,
+      "prediction_summary": {
+        "efficiency": [
+          {
+            "predicted_efficiency": 0.0669387121548,
+            "predicted_score": 0.0669387121548,
+            "model_editor": "DeepBE_8e|SpCas9-NG",
+            "notes": "DeepBE ABE8e(V106W) local adapter using 30nt 4bp+20bp+PAM+3bp input. target_source=sequence_context_30nt; pam_variant_source=explicit. T1-derived total-like efficiency is the sum of DeepBE predicted edited-outcome scores; use as supplementary, not primary scalar-efficiency evidence."
+          }
+        ],
+        "position_scores": [],
+        "top_outcomes": [
+          {
+            "outcome": "GGGGAAAAGCCCCCGGGGGTTTTTGGGAAA",
+            "frequency": 0.0433737288919,
+            "proportion": 0.0433737288919,
+            "score": 0.0433737288919,
+            "model_editor": "DeepBE_8e|SpCas9-NG"
+          },
+          {
+            "outcome": "GGGGAAAGGCCCCCGGGGGTTTTTGGGAAA",
+            "frequency": 0.0202568072194,
+            "proportion": 0.0202568072194,
+            "score": 0.0202568072194,
+            "model_editor": "DeepBE_8e|SpCas9-NG"
+          },
+          {
+            "outcome": "GGGGAAAGACCCCCGGGGGTTTTTGGGAAA",
+            "frequency": 0.00317698096642,
+            "proportion": 0.00317698096642,
+            "score": 0.00317698096642,
+            "model_editor": "DeepBE_8e|SpCas9-NG"
+          },
+          {
+            "outcome": "GGGGAAGAACCCCCGGGGGTTTTTGGGAAA",
+            "frequency": 0.000131145290682,
+            "proportion": 0.000131145290682,
+            "score": 0.000131145290682,
+            "model_editor": "DeepBE_8e|SpCas9-NG"
+          },
+          {
+            "outcome": "GGGGAAGGACCCCCGGGGGTTTTTGGGAAA",
+            "frequency": 2.60898222865e-08,
+            "proportion": 2.60898222865e-08,
+            "score": 2.60898222865e-08,
+            "model_editor": "DeepBE_8e|SpCas9-NG"
+          },
+          {
+            "outcome": "GGGGAAGAGCCCCCGGGGGTTTTTGGGAAA",
+            "frequency": 1.25013666152e-08,
+            "proportion": 1.25013666152e-08,
+            "score": 1.25013666152e-08,
+            "model_editor": "DeepBE_8e|SpCas9-NG"
+          },
+          {
+            "outcome": "GGGGAAGGGCCCCCGGGGGTTTTTGGGAAA",
+            "frequency": 1.11952157339e-08,
+            "proportion": 1.11952157339e-08,
+            "score": 1.11952157339e-08,
+            "model_editor": "DeepBE_8e|SpCas9-NG"
+          }
+        ]
+      },
+      "stdout": "{\n  \"model_id\": \"deepbe\",\n  \"selected_inputs\": 1,\n  \"predictions\": 8,\n  \"skipped\": 0,\n  \"output\": \"C:\\\\Users\\\\tao\\\\AppData\\\\Local\\\\Temp\\\\be_prediction_system_deepbe_27pv12yt\\\\adapter_output\\\\predictions_deepbe_pilot.csv\"\n}\n",
+      "stderr_note": "_110.dll not found\n2026-07-03 10:41:35.960627: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cublas64_11.dll'; dlerror: cublas64_11.dll not found\n2026-07-03 10:41:35.961018: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cublasLt64_11.dll'; dlerror: cublasLt64_11.dll not found\n2026-07-03 10:41:35.961437: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cufft64_10.dll'; dlerror: cufft64_10.dll not found\n2026-07-03 10:41:35.961819: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'curand64_10.dll'; dlerror: curand64_10.dll not found\n2026-07-03 10:41:35.962219: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cusolver64_11.dll'; dlerror: cusolver64_11.dll not found\n2026-07-03 10:41:35.962605: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cusparse64_11.dll'; dlerror: cusparse64_11.dll not found\n2026-07-03 10:41:35.962992: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cudnn64_8.dll'; dlerror: cudnn64_8.dll not found\n2026-07-03 10:41:35.963007: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1934] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.\nSkipping registering GPU devices...\n2026-07-03 10:41:35.963285: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX AVX2\nTo enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.\n"
+    },
+    {
+      "model_id": "bedict_v2",
+      "status": "completed",
+      "prediction_count": 31,
+      "skipped_count": 0,
+      "prediction_summary": {
+        "efficiency": [],
+        "position_scores": [],
+        "top_outcomes": [
+          {
+            "outcome": "AAAAGCCCCCGGGGGTTTTTGGGA",
+            "frequency": null,
+            "proportion": 0.888450761636,
+            "score": 0.888450761636,
+            "model_editor": "ABE8e-SpRY"
+          },
+          {
+            "outcome": "GAAAACCCCCGGGGGTTTTTGGGA",
+            "frequency": null,
+            "proportion": 0.0577808165302,
+            "score": 0.0577808165302,
+            "model_editor": "ABE8e-SpRY"
+          },
+          {
+            "outcome": "AAAGACCCCCGGGGGTTTTTGGGA",
+            "frequency": null,
+            "proportion": 0.0213919505865,
+            "score": 0.0213919505865,
+            "model_editor": "ABE8e-SpRY"
+          },
+          {
+            "outcome": "AAGAACCCCCGGGGGTTTTTGGGA",
+            "frequency": null,
+            "proportion": 0.0153467889565,
+            "score": 0.0153467889565,
+            "model_editor": "ABE8e-SpRY"
+          },
+          {
+            "outcome": "AGAAACCCCCGGGGGTTTTTGGGA",
+            "frequency": null,
+            "proportion": 0.0129845381404,
+            "score": 0.0129845381404,
+            "model_editor": "ABE8e-SpRY"
+          },
+          {
+            "outcome": "AAAGGCCCCCGGGGGTTTTTGGGA",
+            "frequency": null,
+            "proportion": 0.00310663179941,
+            "score": 0.00310663179941,
+            "model_editor": "ABE8e-SpRY"
+          },
+          {
+            "outcome": "GAAAGCCCCCGGGGGTTTTTGGGA",
+            "frequency": null,
+            "proportion": 0.000697504779964,
+            "score": 0.000697504779964,
+            "model_editor": "ABE8e-SpRY"
+          },
+          {
+            "outcome": "AGAAGCCCCCGGGGGTTTTTGGGA",
+            "frequency": null,
+            "proportion": 0.000121402988346,
+            "score": 0.000121402988346,
+            "model_editor": "ABE8e-SpRY"
+          },
+          {
+            "outcome": "AAGAGCCCCCGGGGGTTTTTGGGA",
+            "frequency": null,
+            "proportion": 4.2310628487e-05,
+            "score": 4.2310628487e-05,
+            "model_editor": "ABE8e-SpRY"
+          },
+          {
+            "outcome": "AAGGACCCCCGGGGGTTTTTGGGA",
+            "frequency": null,
+            "proportion": 1.77376282409e-05,
+            "score": 1.77376282409e-05,
+            "model_editor": "ABE8e-SpRY"
+          }
+        ]
+      },
+      "stdout": "SpRY | model_dir: E:\\AIselect\\BEs\\BEDICT-V2\\repo\\proportion_model\\output\\experiment_run_proportions_encenc_two_model\\ABE8e-SpRY_proportions_encenc_two_model\\protospacer_PAM\\exp_version_0\\train_val\\run_1\n--- processing input data frame ---\nnumber of NA: 0\n--- checking for violating seqs ---\ninput sequence length: 24\nnumber of NA: 0\n--- generating edit combinations ---\ncomb_final_df:\n Index(['seq_id', 'Inp_seq', 'Outp_seq'], dtype='object')\n24\ninput sequence length: 24\nnumber of NA: 0\nGenerating tensors using sequence config:\n +------------------------------------------------+-------+\n|           Sequence processing Config           | Value |\n+------------------------------------------------+-------+\n|                sequence length                 |   24  |\n|    sequence start index (0-based indexing)     |   0   |\n|     sequence end index (0-based indexing)      |   23  |\n| editable window start index (0-based indexing) |   0   |\n|  editable window end index (0-based indexing)  |   19  |\n|             offset start numbering             |   1   |\n|              offset end numbering              |   24  |\n+------------------------------------------------+-------+\ninput seq length 24\n--- tensorizing ---\n(1, 24)\n--- end ---\n--- creating datatensor ---\n--- loading model config ---\n--- building model ---\ninp_seqlen: 24 outp_seqlen: 24\n--- loading trained model ---\nrunning prediction for base_editor: ABE8e-SpRY | model_dir: E:\\AIselect\\BEs\\BEDICT-V2\\repo\\proportion_model\\output\\experiment_run_proportions_encenc_two_model\\ABE8e-SpRY_proportions_encenc_two_model\\protospacer_PAM\\exp_version_0\\train_val\\run_2\n{\n  \"model_id\": \"bedict_v2\",\n  \"predictions\": 31,\n  \"skipped\": 0,\n  \"raw_tables\": [\n    \"C:\\\\Users\\\\tao\\\\AppData\\\\Local\\\\Temp\\\\be_prediction_system_bedict_v2_703it9ol\\\\adapter_output\\\\raw_bedict_v2_predictions_ABE8e-SpRY.csv\"\n  ],\n  \"output\": \"C:\\\\Users\\\\tao\\\\AppData\\\\Local\\\\Temp\\\\be_prediction_system_bedict_v2_703it9ol\\\\adapter_output\\\\predictions_bedict_v2_pilot.csv\"\n}\n",
+      "stderr_note": "ll be removed in a future version. To retain the old behavior, explicitly call `result.infer_objects(copy=False)`. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`\n  baseseq_df.replace(['A', 'C', 'T', 'G'], [0,1,2,3], inplace=True)\n\n250it [00:00, 19230.75it/s]            \n\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|��������������������| 1/1 [00:00<00:00, 499.80it/s]\n\n0it [00:00, ?it/s]\n1it [00:00, 124.95it/s]\n\n  0%|          | 0/100 [00:00<?, ?it/s]E:\\AIselect\\BEs\\BEDICT-V2\\repo\\utils\\sequence_process.py:354: FutureWarning: Downcasting behavior in `replace` is deprecated and will be removed in a future version. To retain the old behavior, explicitly call `result.infer_objects(copy=False)`. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`\n  baseseq_df.replace(['A', 'C', 'T', 'G'], [0,1,2,3], inplace=True)\n\n225it [00:00, 56237.32it/s]            \n\n0it [00:00, ?it/s]\n1it [00:00, 333.38it/s]\n\n  0%|          | 0/100 [00:00<?, ?it/s]E:\\AIselect\\BEs\\BEDICT-V2\\repo\\utils\\sequence_process.py:354: FutureWarning: Downcasting behavior in `replace` is deprecated and will be removed in a future version. To retain the old behavior, explicitly call `result.infer_objects(copy=False)`. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`\n  baseseq_df.replace(['A', 'C', 'T', 'G'], [0,1,2,3], inplace=True)\nE:\\AIselect\\BEs\\BEDICT-V2\\repo\\utils\\sequence_process.py:354: FutureWarning: Downcasting behavior in `replace` is deprecated and will be removed in a future version. To retain the old behavior, explicitly call `result.infer_objects(copy=False)`. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`\n  baseseq_df.replace(['A', 'C', 'T', 'G'], [0,1,2,3], inplace=True)\n\n250it [00:00, 17234.41it/s]            \n\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|��������������������| 1/1 [00:00<00:00, 499.50it/s]\n\n0it [00:00, ?it/s]\n1it [00:00, 142.85it/s]\n"
+    },
+    {
+      "model_id": "behive_bystander",
+      "status": "skipped",
+      "reason": "BE-Hive bystander requires concrete 50nt sequence",
+      "skipped_rows": [
+        {
+          "benchmark_id": "user_input_0001",
+          "reason": "BE-Hive bystander requires concrete 50nt sequence"
+        }
+      ],
+      "stdout": "{\n  \"model_id\": \"behive_bystander\",\n  \"predictions\": 0,\n  \"skipped\": 1,\n  \"output\": \"C:\\\\Users\\\\tao\\\\AppData\\\\Local\\\\Temp\\\\be_prediction_system_behive_bystander_0bn2dwed\\\\adapter_output\\\\predictions_behive_bystander_pilot.csv\"\n}\n"
+    },
+    {
+      "model_id": "behive_efficiency",
+      "status": "skipped",
+      "reason": "BE-Hive efficiency requires concrete 50nt sequence",
+      "skipped_rows": [
+        {
+          "benchmark_id": "user_input_0001",
+          "reason": "BE-Hive efficiency requires concrete 50nt sequence"
+        }
+      ],
+      "stdout": "{\n  \"model_id\": \"behive_efficiency\",\n  \"predictions\": 0,\n  \"skipped\": 1,\n  \"output\": \"C:\\\\Users\\\\tao\\\\AppData\\\\Local\\\\Temp\\\\be_prediction_system_behive_efficiency_fx0s__eh\\\\adapter_output\\\\predictions_behive_efficiency_pilot.csv\"\n}\n"
+    },
+    {
+      "model_id": "yachie_base_editing_prediction",
+      "status": "completed",
+      "prediction_count": 1,
+      "skipped_count": 0,
+      "prediction_summary": {
+        "efficiency": [],
+        "position_scores": [],
+        "top_outcomes": [
+          {
+            "outcome": "GGGGAAAAGCCCCCGGGGGTTTTTGGGAAA",
+            "frequency": 0.101837119602,
+            "proportion": null,
+            "score": 0.101837119602,
+            "model_editor": "ABE"
+          }
+        ]
+      },
+      "stdout": "{\n  \"model_id\": \"yachie_base_editing_prediction\",\n  \"predictions\": 1,\n  \"skipped\": 0,\n  \"output\": \"C:\\\\Users\\\\tao\\\\AppData\\\\Local\\\\Temp\\\\be_prediction_system_yachie_base_editing_prediction_d_9p6r0x\\\\adapter_output\\\\predictions_yachie_pilot.csv\"\n}\n",
+      "stderr_note": ""
+    },
+    {
+      "model_id": "be_endo",
+      "status": "skipped",
+      "reason": "BE_Endo BE_Seq requires 40bp sequence with NGG PAM at positions 31-33",
+      "skipped_rows": [
+        {
+          "benchmark_id": "user_input_0001",
+          "reason": "BE_Endo BE_Seq requires 40bp sequence with NGG PAM at positions 31-33"
+        }
+      ],
+      "stdout": "{\n  \"model_id\": \"be_endo\",\n  \"predictions\": 0,\n  \"skipped\": 1,\n  \"output\": \"C:\\\\Users\\\\tao\\\\AppData\\\\Local\\\\Temp\\\\be_prediction_system_be_endo_mmzfoc_i\\\\adapter_output\\\\predictions_be_endo_seq_pilot.csv\"\n}\n"
+    },
+    {
+      "model_id": "epcnnbe",
+      "status": "completed",
+      "prediction_count": 1,
+      "skipped_count": 0,
+      "prediction_summary": {
+        "efficiency": [],
+        "position_scores": [],
+        "top_outcomes": [
+          {
+            "outcome": "GGGGAAAAGCCCCCGGGGGTTTTTGGGAAA",
+            "frequency": 0.499999970198,
+            "proportion": 0.499999970198,
+            "score": 0.0,
+            "model_editor": "ABE"
+          }
+        ]
+      },
+      "stdout": "{\n  \"model_id\": \"epcnnbe\",\n  \"predictions\": 2,\n  \"skipped\": 0,\n  \"output\": \"C:\\\\Users\\\\tao\\\\AppData\\\\Local\\\\Temp\\\\be_prediction_system_epcnnbe_42rgvtxk\\\\adapter_output\\\\predictions_epcnnbe_pilot.csv\"\n}\n",
+      "stderr_note": ""
+    },
+    {
+      "model_id": "crispron_be",
+      "status": "completed",
+      "prediction_count": 8,
+      "skipped_count": 0,
+      "prediction_summary": {
+        "efficiency": [
+          {
+            "predicted_efficiency": 0.069779214859,
+            "predicted_score": 6.9779214859,
+            "model_editor": "CRISPRon-ABE",
+            "notes": "CRISPRon-BE hybrid reproduction: Windows TensorFlow inference plus project-local WSL RNAfold helper. Raw output reports percentages; predicted_efficiency is divided by 100."
+          }
+        ],
+        "position_scores": [],
+        "top_outcomes": [
+          {
+            "outcome": "GGGGAAAAGCCCCCGGGGGTTTTTGGGAAA",
+            "frequency": 0.0551763786219,
+            "proportion": 0.790727994481,
+            "score": 5.51763786219,
+            "model_editor": "CRISPRon-ABE"
+          },
+          {
+            "outcome": "GGGGAAAGACCCCCGGGGGTTTTTGGGAAA",
+            "frequency": 0.00753331337365,
+            "proportion": 0.10795927396,
+            "score": 0.753331337365,
+            "model_editor": "CRISPRon-ABE"
+          },
+          {
+            "outcome": "GGGGAAAGGCCCCCGGGGGTTTTTGGGAAA",
+            "frequency": 0.00379558651617,
+            "proportion": 0.0543942279063,
+            "score": 0.379558651617,
+            "model_editor": "CRISPRon-ABE"
+          },
+          {
+            "outcome": "GGGGAAGAACCCCCGGGGGTTTTTGGGAAA",
+            "frequency": 0.00244155038099,
+            "proportion": 0.0349896510862,
+            "score": 0.244155038099,
+            "model_editor": "CRISPRon-ABE"
+          },
+          {
+            "outcome": "GGGGAAGAGCCCCCGGGGGTTTTTGGGAAA",
+            "frequency": 0.000648811425518,
+            "proportion": 0.00929806141884,
+            "score": 0.0648811425518,
+            "model_editor": "CRISPRon-ABE"
+          },
+          {
+            "outcome": "GGGGAAGGGCCCCCGGGGGTTTTTGGGAAA",
+            "frequency": 0.000183574540775,
+            "proportion": 0.00263079114813,
+            "score": 0.0183574540775,
+            "model_editor": "CRISPRon-ABE"
+          },
+          {
+            "outcome": "GGGGAAGGACCCCCGGGGGTTTTTGGGAAA",
+            "frequency": 0.0,
+            "proportion": 0.0,
+            "score": 0.0,
+            "model_editor": "CRISPRon-ABE"
+          }
+        ]
+      },
+      "stdout": "{\n  \"model_id\": \"crispron_be\",\n  \"predictions\": 8,\n  \"skipped\": 0,\n  \"output\": \"C:\\\\Users\\\\tao\\\\AppData\\\\Local\\\\Temp\\\\be_prediction_system_crispron_be_71_duvdp\\\\adapter_output\\\\predictions_crispron_be_pilot.csv\"\n}\n",
+      "stderr_note": ""
+    }
+  ]
+}

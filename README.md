@@ -1,6 +1,8 @@
 # BE-Benchmark interface scaffold
 
-This repository is a generic software scaffold for a base-editor prediction interface. It intentionally contains no manuscript-specific dataset, source-data table, result value, analysis workflow, plotting workflow, trained model, model weight or third-party implementation.
+The [Research reproducibility package](reproducibility/README.md) provides the data and analysis accompanying the revision.
+
+The interface is a generic software scaffold for a base-editor prediction interface. It intentionally contains no manuscript-specific dataset, source-data table, result value, analysis workflow, plotting workflow, trained model, model weight or third-party implementation.
 
 The scaffold provides only:
 

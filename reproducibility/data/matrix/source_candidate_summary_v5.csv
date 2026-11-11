@@ -1,0 +1,9 @@
+source_family,files,rows,size_mb,est_t1_rows,est_ngg_rows,est_unique_refs,est_outcome_rows
+BE-DICT,4,405192,36.118,0,0,0,0
+BE-Hive,56,494166,208.526,481859,0,0,0
+BEDICT2,28,294824,37.05,283336,28053,0,0
+BE_Endo,2,27235,2.585,0,0,0,0
+BEguider,5,395194,37.195,0,0,0,0
+CGBE,12,106427,48.814,0,0,0,0
+CRISPRon-BE,4,355430,5.775,43080,0,43080,355430
+FORECasT-BE,1,106679,259.141,0,0,0,0

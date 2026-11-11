@@ -1,0 +1,97 @@
+[
+  {
+    "source": "SCI-data/返修/12_R2.11/review_release/original_figures/Fig2/code/analyze_and_plot_t1_v8.py",
+    "source_sha256": "20ee18f7fd53def93b1767616692623d287e64138ee25c0ac5a89c50101fcca1",
+    "path": "tasks/T1/code/replay_scalar.py",
+    "sha256": "80280b68418de3a5e09ffa6958b4bee19939ec634c5d16ac47ce93a45496bdcd",
+    "extracted_symbols": [
+      "MODELS",
+      "MIN_STRATUM_N",
+      "correlation",
+      "primary_metrics",
+      "paired_cluster_bootstrap",
+      "metadata_strata"
+    ]
+  },
+  {
+    "source": "SCI-data/返修/12_R2.11/review_release/original_figures/Fig2/code/build_t1_v8_1_fig2.py",
+    "source_sha256": "283abd354a4c56dfc29f1103444be0ad77aac13a258cf65567f0af1da7188ffd",
+    "path": "tasks/T1/code/replay_calibration_v81.py",
+    "sha256": "5a87d5bd02289b8c790e68eb62ab4dafb70ef16cf6084653a0e57291d34b1c09",
+    "extracted_symbols": [
+      "MIN_STRATUM_N",
+      "load_analysis",
+      "absolute_calibration",
+      "strata_audit"
+    ]
+  },
+  {
+    "source": "benchmark_core/formal_results/T5_metadata_first_generalization_v1_1_joint_matched_revision/code/build_t5_v1_1_joint_matched_revision.py",
+    "source_sha256": "c6aec265715b670cdcf275f2e895be29cf73436f77df8541045eabb89f4df8b1",
+    "path": "tasks/T5/code/replay_joint_matching.py",
+    "sha256": "65a3aab5954ebd0379694505bb3f577fe6359d3456fd6fce4d7ec35eeae11960",
+    "extracted_symbols": [
+      "BOOTSTRAP_REPLICATES",
+      "MATERIAL_TOLERANCE",
+      "NUMERICAL_TOLERANCE",
+      "MODEL_ORDER",
+      "MODEL_DISPLAY",
+      "MODEL_RELATION",
+      "SPECS",
+      "safe_spearman",
+      "relation_for_model",
+      "make_unit_id",
+      "audit_matching",
+      "aggregate_joint_units",
+      "run_joint_bootstrap",
+      "build_sensitivity",
+      "build_context_invariance"
+    ]
+  },
+  {
+    "source": "SCI-data/返修/12_R2.11/review_release/original_figures/Fig8/T7_unique_design_recommendation_v2/code/build_t7_unique_design_recommendation_v2.py",
+    "source_sha256": "2992744bb3f38094ec5b18ae9c0457add361e1d3c949ebf2f99a01cdff159767",
+    "path": "tasks/T7/code/replay_recommendation.py",
+    "sha256": "c21a8b800e3df06f9c0d23dae9b09f23c296d0e9f16e5464ccc3578f4147cdd5",
+    "extracted_symbols": [
+      "SCENARIO",
+      "MODELS",
+      "DISPLAY",
+      "dcg",
+      "score_ranked_group",
+      "score_models",
+      "METRIC_COLS",
+      "random_and_oracle_baselines",
+      "summarize_metrics"
+    ]
+  },
+  {
+    "source": "benchmark_core/scripts/build_unified_matrix_v5.py",
+    "source_sha256": "e60eb0ff838ce96dc7cf46c6f88c9a6ff43adac12202a93ff82c15c03529b2b4",
+    "path": "data/code/build_unified_matrix_v5.py",
+    "sha256": "3817ef4f354fe4ef2fccda26bdd4e9d6722cad0c90d5d4ca12e785afb8f53513",
+    "extracted_symbols": [],
+    "transform": "project paths parameterized by BE_REPLAY_PROJECT"
+  },
+  {
+    "source": "SCI-data/返修/07_R2.6/code/summarize_missing_policies.py",
+    "source_sha256": "5ab49ba5257c9c22a15e7c585c589f06f8cfc5ca859019d4e191a9c50ec14ee9",
+    "path": "tasks/revision/07_R2.6/code/summarize_missing_policies.py",
+    "sha256": "60dd84c83dadb757e3abce8644762f373c364660210c95f4b595e7d0ec434f9c",
+    "transform": "Selected numeric computation; removed draft and response generation"
+  },
+  {
+    "source": "SCI-data/返修/12_R2.11/review_release/original_figures/Fig3/code/score_t2_expanded.py",
+    "source_sha256": "e84ac15459ce68b2b47f173aff79ed98626ca63ffe1c16e988783e9d78747699",
+    "path": "tasks/T2/code/score_t2_expanded.py",
+    "sha256": "43b2a30a256ec040f341683259059e39d3d5654d393ef9718177218125a80acb",
+    "transform": "Registry lookup uses BE_REPLAY_PROJECT"
+  },
+  {
+    "source": "SCI-data/返修/12_R2.11/review_release/original_figures/Fig8/T7_unique_design_recommendation_v2/code/build_t7_unique_design_recommendation_v2.py",
+    "source_sha256": "2992744bb3f38094ec5b18ae9c0457add361e1d3c949ebf2f99a01cdff159767",
+    "path": "tasks/T7/code/replay_aggregation.py",
+    "sha256": "3257a7cb255f9bb5e4056d96a8b8a1684958441ee4041ed1f13c2c70ef2bcdbb",
+    "transform": "Numeric membership and prediction aggregation functions with explicit input paths"
+  }
+]

@@ -33,7 +33,7 @@ def main() -> int:
         if not path.is_file() or path == MANIFEST:
             continue
         relative = path.relative_to(ROOT)
-        if relative.parts and relative.parts[0] == ".git":
+        if relative.parts and relative.parts[0] in {".git", "reproducibility"}:
             continue
         actual[relative.as_posix()] = path
     if "LICENSE" not in actual:

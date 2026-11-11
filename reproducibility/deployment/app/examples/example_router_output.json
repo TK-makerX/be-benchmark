@@ -1,0 +1,415 @@
+{
+  "system_name": "BE-Benchmark local prediction router",
+  "system_version": "0.6.0-scientific-registry",
+  "input": {
+    "editor": "ABE8e",
+    "editor_family": "ABE",
+    "requested_task": "auto",
+    "selected_tasks": [
+      "scalar_efficiency",
+      "high_low_screening",
+      "outcome_profile",
+      "position_profile",
+      "design_recommendation"
+    ],
+    "cell_context": "",
+    "cas_variant": "",
+    "reference_outcome": ""
+  },
+  "sequence_assessment": {
+    "raw_sequence": "GGGGAAAAACCCCCGGGGGTTTTTGGGAAA",
+    "sequence": "GGGGAAAAACCCCCGGGGGTTTTTGGGAAA",
+    "valid_dna": true,
+    "invalid_characters": [],
+    "length": 30,
+    "inferred_input_type": "30nt_model_window",
+    "pam": "GGG",
+    "is_ngg_like": true,
+    "abe_window_bases": "AACCC",
+    "cbe_window_bases": "AACCC",
+    "abe_candidate_positions_1based": [
+      4,
+      5
+    ],
+    "cbe_candidate_positions_1based": [
+      6,
+      7,
+      8
+    ],
+    "warnings": []
+  },
+  "routes": [
+    {
+      "model_id": "crispron_be",
+      "display_name": "CRISPRon-BE",
+      "integration_status": "locally_reproduced_hybrid_windows_wsl_helper",
+      "runtime_family": "TensorFlow 2.10 + project-local WSL RNAfold helper",
+      "license_reuse_note": "Business Source License; local benchmark use is recorded, production/hosted-service reuse needs license review.",
+      "task_routes": [
+        {
+          "task": "scalar_efficiency",
+          "task_label": "Scalar editing efficiency",
+          "role": "primary scalar-efficiency backend",
+          "confidence_tier": "high",
+          "benchmark_basis": "Fig. 2; Fig. 7",
+          "benchmark_summary": "Fig. 2 V8.1 Spearman 0.4722 (95% CI 0.4537-0.4900) on 10,000 label-blind observations; absolute calibration remained weak (RMSE 0.2097; R2 -0.2089).",
+          "warnings": []
+        },
+        {
+          "task": "high_low_screening",
+          "task_label": "High-vs-low screening",
+          "role": "primary screening backend",
+          "confidence_tier": "high",
+          "benchmark_basis": "Fig. 5",
+          "benchmark_summary": "Fig. 5 V2.1 AUROC 0.8593 and AUPRC 0.8218 on 5,108 clean high-versus-low design-editor-cell-context units.",
+          "warnings": []
+        },
+        {
+          "task": "outcome_profile",
+          "task_label": "Edited-product / bystander profile",
+          "role": "non-source-associated profile backend for the evaluated source",
+          "confidence_tier": "moderate",
+          "benchmark_basis": "Fig. 3; Fig. 7",
+          "benchmark_summary": "Profile evidence was evaluated on BE-Hive-derived single-source data; training-set independence was not established.",
+          "warnings": []
+        },
+        {
+          "task": "position_profile",
+          "task_label": "Position-level editing profile",
+          "role": "non-source-associated position-profile backend for the evaluated source",
+          "confidence_tier": "moderate",
+          "benchmark_basis": "Fig. 4; Fig. 7",
+          "benchmark_summary": "Fig. 4 matched 307 of 3,047 evaluated positions (10.08% coverage) on BE-Hive-derived single-source data; this is not strict-external evidence.",
+          "warnings": []
+        },
+        {
+          "task": "design_recommendation",
+          "task_label": "Design recommendation / top-k ranking",
+          "role": "top-k design-ranking backend",
+          "confidence_tier": "moderate",
+          "benchmark_basis": "Fig. 8A-F; random/oracle baseline table",
+          "benchmark_summary": "Across 39 complete groups (503,545 candidates), mean NDCG@10 was 0.3269, precision@10 0.2615 and enrichment@10 2.6139 versus random enrichment 1.0113; top-1 best-hit was 0.",
+          "warnings": []
+        }
+      ],
+      "system_use": "strong research backend with license/deployment caveats",
+      "major_caveat": "Slowest local timing among controlled roles and no prediction when the relevant target base is absent from the editing window."
+    },
+    {
+      "model_id": "behive_bystander",
+      "display_name": "BE-Hive bystander",
+      "integration_status": "locally_reproduced_windows_native",
+      "runtime_family": "modern CPU PyTorch",
+      "license_reuse_note": "README points to upstream web terms, but no model-local license text was found; review terms before redistribution or hosted use.",
+      "task_routes": [
+        {
+          "task": "outcome_profile",
+          "task_label": "Edited-product / bystander profile",
+          "role": "source-associated profile backend",
+          "confidence_tier": "moderate_with_input_caveat",
+          "benchmark_basis": "Fig. 3; Fig. 7",
+          "benchmark_summary": "Source-associated bystander/product-profile evidence on compatible BE-Hive editor and cell contexts.",
+          "warnings": [
+            "Input type 30nt_model_window may need adapter-specific preprocessing."
+          ]
+        },
+        {
+          "task": "position_profile",
+          "task_label": "Position-level editing profile",
+          "role": "complete calibrated source-associated position backend",
+          "confidence_tier": "moderate_with_input_caveat",
+          "benchmark_basis": "Fig. 4; Fig. 7",
+          "benchmark_summary": "Source-associated conditional-rate model with all 2,983 evaluated positions matched and the lowest calibrated-rate error among comparable conditional-rate models.",
+          "warnings": [
+            "Input type 30nt_model_window may need adapter-specific preprocessing."
+          ]
+        }
+      ],
+      "system_use": "strong source-associated profile backend",
+      "major_caveat": "Native output is conditional bystander/product mass, not direct scalar activity."
+    },
+    {
+      "model_id": "bedict_v2",
+      "display_name": "BEDICT-V2",
+      "integration_status": "locally_reproduced_windows_native",
+      "runtime_family": "modern CPU PyTorch",
+      "license_reuse_note": "MIT license file present locally.",
+      "task_routes": [
+        {
+          "task": "outcome_profile",
+          "task_label": "Edited-product / bystander profile",
+          "role": "profile backend",
+          "confidence_tier": "moderate",
+          "benchmark_basis": "Fig. 3; Fig. 7",
+          "benchmark_summary": "Editor-context-aware profile evidence on compatible inputs; interpretation remains endpoint- and source-specific.",
+          "warnings": []
+        },
+        {
+          "task": "position_profile",
+          "task_label": "Position-level editing profile",
+          "role": "restricted proxy position backend",
+          "confidence_tier": "restricted",
+          "benchmark_basis": "Fig. 4; Fig. 7",
+          "benchmark_summary": "Restricted conditional-rate proxy with 481 of 795 evaluated positions matched (60.50% coverage).",
+          "warnings": []
+        }
+      ],
+      "system_use": "low-friction profile/backend candidate",
+      "major_caveat": "No scalar route was included in canonical Fig. 2 V8.1; use this backend for compatible editor-context profile outputs unless a scalar adapter is separately validated."
+    },
+    {
+      "model_id": "deepbe",
+      "display_name": "DeepBE",
+      "integration_status": "locally_reproduced_windows_native_compatibility_runner",
+      "runtime_family": "TensorFlow 2.10 compatibility",
+      "license_reuse_note": "Model license unresolved from local source; local benchmark reuse only unless terms are reviewed.",
+      "task_routes": [
+        {
+          "task": "scalar_efficiency",
+          "task_label": "Scalar editing efficiency",
+          "role": "scalar-efficiency backend",
+          "confidence_tier": "moderate",
+          "benchmark_basis": "Fig. 2; Fig. 7",
+          "benchmark_summary": "Fig. 2 V8.1 Spearman 0.3939 (95% CI 0.3752-0.4122) on 10,000 observations; the score is association-eligible but not calibration-eligible.",
+          "warnings": []
+        },
+        {
+          "task": "high_low_screening",
+          "task_label": "High-vs-low screening",
+          "role": "screening backend",
+          "confidence_tier": "moderate",
+          "benchmark_basis": "Fig. 5",
+          "benchmark_summary": "Fig. 5 V2.1 AUROC 0.8106 and AUPRC 0.7477 on 5,108 clean high-versus-low context units.",
+          "warnings": []
+        },
+        {
+          "task": "outcome_profile",
+          "task_label": "Edited-product / bystander profile",
+          "role": "proxy profile backend",
+          "confidence_tier": "restricted",
+          "benchmark_basis": "Fig. 3; Fig. 7",
+          "benchmark_summary": "Restricted proxy profile evidence on BE-Hive-derived single-source data; training overlap was unresolved.",
+          "warnings": []
+        },
+        {
+          "task": "position_profile",
+          "task_label": "Position-level editing profile",
+          "role": "restricted proxy position backend",
+          "confidence_tier": "restricted",
+          "benchmark_basis": "Fig. 4; Fig. 7",
+          "benchmark_summary": "Restricted conditional-rate proxy with 101 of 312 evaluated positions matched (32.37% coverage); not a strict-external result.",
+          "warnings": []
+        }
+      ],
+      "system_use": "research backend with reuse caveat",
+      "major_caveat": "Current adapter is minimal ABE-focused; broader editor/PAM support needs more wrappers."
+    },
+    {
+      "model_id": "deepbaseeditor",
+      "display_name": "DeepBaseEditor",
+      "integration_status": "locally_reproduced_compatibility_runner",
+      "runtime_family": "Python2/TF1 upstream via TensorFlow 2 compatibility runner",
+      "license_reuse_note": "MIT evidence for relevant subdirectories; verify unlicensed paired assets before redistribution.",
+      "task_routes": [
+        {
+          "task": "scalar_efficiency",
+          "task_label": "Scalar editing efficiency",
+          "role": "scalar-efficiency backend",
+          "confidence_tier": "moderate",
+          "benchmark_basis": "Fig. 2; Fig. 7",
+          "benchmark_summary": "Fig. 2 V8.1 Spearman 0.2457 (95% CI 0.2248-0.2667) on 10,000 observations; training overlap was unresolved.",
+          "warnings": []
+        },
+        {
+          "task": "high_low_screening",
+          "task_label": "High-vs-low screening",
+          "role": "screening backend",
+          "confidence_tier": "moderate",
+          "benchmark_basis": "Fig. 5",
+          "benchmark_summary": "Fig. 5 V2.1 AUROC 0.7012 and AUPRC 0.6486 on 5,108 clean high-versus-low context units.",
+          "warnings": []
+        },
+        {
+          "task": "position_profile",
+          "task_label": "Position-level editing profile",
+          "role": "exploratory supplementary position backend",
+          "confidence_tier": "research_only",
+          "benchmark_basis": "Fig. 4; Fig. 7",
+          "benchmark_summary": "Exploratory historical proxy only; 630 of 3,064 evaluated positions were matched (20.56% coverage).",
+          "warnings": []
+        }
+      ],
+      "system_use": "research backend with legacy-code caveat",
+      "major_caveat": "Current adapter covers historical ABE efficiency; other modules require additional wrappers."
+    },
+    {
+      "model_id": "forecast_be",
+      "display_name": "FORECasT-BE",
+      "integration_status": "locally_reproduced_windows_native",
+      "runtime_family": "sklearn/joblib",
+      "license_reuse_note": "MIT license file present locally; verify model-asset terms if redistributed.",
+      "task_routes": [
+        {
+          "task": "scalar_efficiency",
+          "task_label": "Scalar editing efficiency",
+          "role": "scalar-efficiency backend",
+          "confidence_tier": "moderate",
+          "benchmark_basis": "Fig. 2; Fig. 7",
+          "benchmark_summary": "Fig. 2 V8.1 Spearman 0.3366 (95% CI 0.3176-0.3563) on 10,000 observations; native scores are interpreted for association rather than absolute calibration.",
+          "warnings": []
+        },
+        {
+          "task": "high_low_screening",
+          "task_label": "High-vs-low screening",
+          "role": "screening backend",
+          "confidence_tier": "moderate",
+          "benchmark_basis": "Fig. 5",
+          "benchmark_summary": "Fig. 5 V2.1 AUROC 0.7599 and AUPRC 0.7000 on 5,108 clean high-versus-low context units.",
+          "warnings": []
+        },
+        {
+          "task": "position_profile",
+          "task_label": "Position-level editing profile",
+          "role": "rank-oriented position-profile backend",
+          "confidence_tier": "moderate",
+          "benchmark_basis": "Fig. 4; Fig. 7",
+          "benchmark_summary": "Fig. 4 matched 646 of 2,894 evaluated positions (22.32% coverage); the position output was treated as an uncalibrated rank score on BE-Hive-derived single-source data.",
+          "warnings": []
+        },
+        {
+          "task": "design_recommendation",
+          "task_label": "Design recommendation / top-k ranking",
+          "role": "top-k design-ranking backend",
+          "confidence_tier": "moderate",
+          "benchmark_basis": "Fig. 8A-F; random/oracle baseline table",
+          "benchmark_summary": "Across 39 complete groups (503,545 candidates), mean NDCG@10 was 0.3047, precision@10 0.2744 and enrichment@10 2.7417 versus random enrichment 1.0113; top-1 best-hit was 0.",
+          "warnings": []
+        }
+      ],
+      "system_use": "low-friction local backend",
+      "major_caveat": "Native scores are safest for ranking/position-profile use unless calibration assumptions are explicit."
+    },
+    {
+      "model_id": "be_endo",
+      "display_name": "BE_Endo sequence-only",
+      "integration_status": "locally_reproduced_sequence_only",
+      "runtime_family": "TensorFlow 2.10 compatibility",
+      "license_reuse_note": "No local license found; local benchmark reuse only unless upstream terms are reviewed.",
+      "task_routes": [
+        {
+          "task": "outcome_profile",
+          "task_label": "Edited-product / bystander profile",
+          "role": "position/profile proxy backend",
+          "confidence_tier": "restricted",
+          "benchmark_basis": "Fig. 3; Fig. 7",
+          "benchmark_summary": "Sequence-only position/profile proxy on compatible inputs; this does not represent the full endogenous-factor mode.",
+          "warnings": []
+        },
+        {
+          "task": "position_profile",
+          "task_label": "Position-level editing profile",
+          "role": "rank-oriented position backend",
+          "confidence_tier": "restricted",
+          "benchmark_basis": "Fig. 4; Fig. 7",
+          "benchmark_summary": "Rank-oriented sequence-only output with 1,158 of 3,139 evaluated positions matched (36.89% coverage).",
+          "warnings": []
+        }
+      ],
+      "system_use": "sequence-only research backend",
+      "major_caveat": "Full endogenous-factor mode still requires auxiliary endogenous-factor resources and bedtools; the current route is sequence-only."
+    },
+    {
+      "model_id": "yachie_base_editing_prediction",
+      "display_name": "Yachie base-editing prediction",
+      "integration_status": "locally_reproduced_windows_native",
+      "runtime_family": "lightweight Python probability model",
+      "license_reuse_note": "No local license found; local benchmark reuse only unless upstream terms are reviewed.",
+      "task_routes": [
+        {
+          "task": "outcome_profile",
+          "task_label": "Edited-product / bystander profile",
+          "role": "proxy outcome-pattern comparator",
+          "confidence_tier": "restricted",
+          "benchmark_basis": "Fig. 3; Fig. 7",
+          "benchmark_summary": "Historical proxy comparator on compatible candidate outcomes, not a calibrated modern neural predictor.",
+          "warnings": []
+        },
+        {
+          "task": "position_profile",
+          "task_label": "Position-level editing profile",
+          "role": "proxy position comparator",
+          "confidence_tier": "restricted",
+          "benchmark_basis": "Fig. 4; Fig. 7",
+          "benchmark_summary": "Observed-candidate proxy score with 1,004 of 3,047 evaluated positions matched (32.95% coverage); supplementary interpretation only.",
+          "warnings": []
+        }
+      ],
+      "system_use": "historical probabilistic comparator",
+      "major_caveat": "Not a modern pretrained neural predictor; current use is proxy/candidate-score context."
+    },
+    {
+      "model_id": "behive_efficiency",
+      "display_name": "BE-Hive efficiency",
+      "integration_status": "locally_reproduced_with_legacy_environment",
+      "runtime_family": "legacy sklearn/Python 3.7",
+      "license_reuse_note": "README points to upstream web terms, but no model-local license text was found; review terms before redistribution or hosted use.",
+      "task_routes": [
+        {
+          "task": "scalar_efficiency",
+          "task_label": "Scalar editing efficiency",
+          "role": "supported-context scalar backend outside the canonical four-model comparison",
+          "confidence_tier": "research_only",
+          "benchmark_basis": "Fig. 7 operational evidence",
+          "benchmark_summary": "Not included in canonical Fig. 2 V8.1; its native 50-nt editor/cell-context and calibration requirements were outside the frozen four-model comparison.",
+          "warnings": [
+            "Input type 30nt_model_window may need adapter-specific preprocessing."
+          ]
+        },
+        {
+          "task": "high_low_screening",
+          "task_label": "High-vs-low screening",
+          "role": "supported-context screening backend outside the canonical four-model comparison",
+          "confidence_tier": "research_only",
+          "benchmark_basis": "Fig. 7 operational evidence",
+          "benchmark_summary": "Not included in canonical Fig. 5 V2.1; no comparative AUROC or AUPRC claim is made for the frozen screening panel.",
+          "warnings": [
+            "Input type 30nt_model_window may need adapter-specific preprocessing."
+          ]
+        }
+      ],
+      "system_use": "source-associated/local benchmark backend only",
+      "major_caveat": "Requires the BE-Hive-native 50-nt window, supported editor/cell context and calibration parameters; it was outside the frozen Fig. 2 and Fig. 5 comparisons."
+    },
+    {
+      "model_id": "epcnnbe",
+      "display_name": "EPCNNBE",
+      "integration_status": "locally_reproduced_windows_native",
+      "runtime_family": "modern CPU PyTorch",
+      "license_reuse_note": "No local license found; local benchmark reuse only unless upstream terms are reviewed.",
+      "task_routes": [
+        {
+          "task": "position_profile",
+          "task_label": "Position-level editing profile",
+          "role": "exploratory supplementary backend",
+          "confidence_tier": "research_only",
+          "benchmark_basis": "Fig. 4; Fig. 7",
+          "benchmark_summary": "Exploratory conditional-rate proxy only; 630 of 3,064 evaluated positions were matched (20.56% coverage).",
+          "warnings": []
+        }
+      ],
+      "system_use": "exploratory backend",
+      "major_caveat": "Not included in canonical Fig. 2 or Fig. 3; Fig. 4 evidence is exploratory proxy evidence only."
+    }
+  ],
+  "global_interpretation": "This research prototype routes inputs to endpoint-compatible, separately installed local predictors. It does not convert rank-only scores to calibrated efficiencies, and it does not fabricate values when a backend is unavailable or an input contract is unmet. Current benchmark evidence is task-specific: the Fig. 2 panel was label-blind and excluded exact matches to known CRISPRon-BE development sequences, but training overlap remains unresolved for DeepBE, FORECasT-BE and DeepBaseEditor; the current benchmark contains no strict-external performance evaluation.",
+  "canonical_evidence": {
+    "Fig. 2 scalar activity": "Manuscript-reported result from the frozen internal benchmark archive; analysis code and panel source data are not distributed in this code-only repository.",
+    "Fig. 3 product profiles": "Manuscript-reported result from the frozen internal benchmark archive; analysis code and panel source data are not distributed in this code-only repository.",
+    "Fig. 4 position profiles": "Manuscript-reported result from the frozen internal benchmark archive; analysis code and panel source data are not distributed in this code-only repository.",
+    "Fig. 5 screening": "Manuscript-reported result from the frozen internal benchmark archive; analysis code and panel source data are not distributed in this code-only repository.",
+    "Fig. 6 context transfer": "Manuscript-reported result from the frozen internal benchmark archive; analysis code and panel source data are not distributed in this code-only repository.",
+    "Fig. 7 reproducibility": "Manuscript-reported result from the frozen internal benchmark archive; analysis code and panel source data are not distributed in this code-only repository.",
+    "Fig. 8 recommendation": "Manuscript-reported result from the frozen internal benchmark archive; analysis code and panel source data are not distributed in this code-only repository."
+  },
+  "model_outputs": []
+}
