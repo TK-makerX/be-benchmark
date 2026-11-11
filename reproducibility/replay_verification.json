@@ -363,7 +363,12 @@
   "matrix": {
     "observations": 1147701,
     "exact_input_files": 61,
-    "reference": "data/matrix_source_files.csv"
+    "reference": "data/matrix_source_files.csv",
+    "relocated_rebuild": {
+      "scientific_fields": "All observation fields except the machine-local path and fallback source identifiers matched the frozen matrix",
+      "design_and_context_masters": "byte-identical",
+      "released_frozen_source_id_lookup_checks_passed": 86
+    }
   },
   "analysis_environment": {
     "python": "3.10.13",

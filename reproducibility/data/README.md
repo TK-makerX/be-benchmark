@@ -21,3 +21,5 @@ python -B reproducibility/scripts/rebuild_matrix.py --work-dir benchmark-replay/
 ```
 
 The Marquart transfer task uses Supplementary Data 2 and 4 from the original publication. The two workbooks and the selected source-site and Excel-row identifiers are available through `additional-task-inputs.zip`. [Marquart et al.](https://doi.org/10.1038/s41467-021-25375-z)
+
+The rebuild restores the archived source identifiers using the verified filename and worksheet mapping in [observation_source_ids_v5.csv](matrix/observation_source_ids_v5.csv). The source path field records the location used for the new build.

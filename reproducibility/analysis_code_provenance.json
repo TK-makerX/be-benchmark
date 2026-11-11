@@ -69,9 +69,9 @@
     "source": "benchmark_core/scripts/build_unified_matrix_v5.py",
     "source_sha256": "e60eb0ff838ce96dc7cf46c6f88c9a6ff43adac12202a93ff82c15c03529b2b4",
     "path": "data/code/build_unified_matrix_v5.py",
-    "sha256": "3817ef4f354fe4ef2fccda26bdd4e9d6722cad0c90d5d4ca12e785afb8f53513",
+    "sha256": "16c6e0bd97f45d5e8349fe595a3abd4b879535c94bc93a990e98bc38da913473",
     "extracted_symbols": [],
-    "transform": "project paths parameterized by BE_REPLAY_PROJECT"
+    "transform": "Project paths parameterized; frozen basename and worksheet source IDs restored at relocation"
   },
   {
     "source": "SCI-data/返修/07_R2.6/code/summarize_missing_policies.py",

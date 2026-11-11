@@ -441,13 +441,17 @@ def load_source_inventory() -> pd.DataFrame:
 
 
 def source_id_lookup(inv: pd.DataFrame) -> Dict[Tuple[str, str], str]:
-    if inv.empty:
-        return {}
     lookup = {}
     for _, row in inv.iterrows():
         key = (str(row.get("source_file", "")), str(row.get("source_sheet", "") or ""))
         lookup[key] = str(row["source_inventory_id"])
         lookup[(Path(str(row.get("source_file", ""))).name, str(row.get("source_sheet", "") or ""))] = str(row["source_inventory_id"])
+
+    # Keep source IDs stable when an upstream file is restored under a new project root.
+    source_map = Path(__file__).resolve().parents[1] / "matrix/observation_source_ids_v5.csv"
+    with source_map.open(encoding="utf-8", newline="") as handle:
+        for row in csv.DictReader(handle):
+            lookup[row["source_filename"], row["source_sheet"]] = row["source_inventory_id"]
     return lookup
 
 
