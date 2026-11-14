@@ -21,6 +21,16 @@ MATRIX = CORE + "/data/unified_matrix_v5"
 CRISPR = "CRISPRon-BE/repo/data_for_model_development_V1.0"
 
 
+MANUSCRIPT_TASK_IDS = {
+    "T1": "scalar-editing-activity",
+    "T2": "bystander-outcome-distribution",
+    "T3": "position-specific-editing",
+    "T4": "high-low-activity-screening",
+    "T5": "ranking-transferability",
+    "T6": "model-reproducibility-and-applicability",
+    "T7": "editor-and-guide-recommendation",
+}
+
 def baseline(name, executable, options, checks, mounts=(), copies=()):
     return {"name": name, "mounts": mounts, "copies": copies,
             "commands": [(f"tasks/{name}/code/{executable}", options)], "checks": checks}
@@ -33,46 +43,46 @@ def revision(name, folder, executable, options, mounts, filenames):
 
 
 def cases():
-    t1 = baseline("T1", "replay_scalar.py", ["--output-dir", "{O}"],
-                  [("{O}/"+f, "tasks/T1/metrics/"+f) for f in (
+    scalar_editing_activity = baseline("scalar-editing-activity", "replay_scalar_editing_activity.py", ["--output-dir", "{O}"],
+                  [("{O}/"+f, "tasks/scalar-editing-activity/metrics/"+f) for f in (
                       "PRIMARY_ASSOCIATION_METRICS.csv", "METADATA_STRATIFIED_ASSOCIATION.csv",
                       "PRIMARY_DESIGN_CLUSTER_BOOTSTRAP_95CI.csv", "PAIRED_SPEARMAN_DIFFERENCE_BOOTSTRAP.csv")],
                   [T1_V8+"/data", T1_V8+"/metrics", T1_V8+"/predictions/harmonized"])
-    t1["commands"].append(("tasks/T1/code/replay_calibration_v81.py",
+    scalar_editing_activity["commands"].append(("tasks/scalar-editing-activity/code/replay_scalar_calibration_v8_1.py",
                            ["--v8-root", f"{{P}}/{T1_V8}", "--output-dir", "{O}/v8_1"]))
-    t1["checks"] += [("{O}/v8_1/metrics/"+f, "tasks/T1/expected/v8_1/"+f) for f in
+    scalar_editing_activity["checks"] += [("{O}/v8_1/metrics/"+f, "tasks/scalar-editing-activity/expected/v8_1/"+f) for f in
                      ("CRISPRON_ABSOLUTE_CALIBRATION_SUMMARY.csv", "CRISPRON_PREDICTED_EFFICIENCY_DECILE_CALIBRATION.csv")]
 
-    t2 = baseline("T2", "score_t2_expanded.py", ["--matrix-dir", "{B}/tasks/T2/inputs", "--runs-dir",
-                   "{B}/tasks/T2/predictions", "--output-dir", "{O}"],
-                  [("{O}/"+f, "tasks/T2/expected/"+f) for f in
+    bystander_outcome_distribution = baseline("bystander-outcome-distribution", "score_bystander_outcomes.py", ["--matrix-dir", "{B}/tasks/bystander-outcome-distribution/inputs", "--runs-dir",
+                   "{B}/tasks/bystander-outcome-distribution/predictions", "--output-dir", "{O}"],
+                  [("{O}/"+f, "tasks/bystander-outcome-distribution/expected/"+f) for f in
                    ("T2_expanded_outcome_metrics.csv", "T2_expanded_position_metrics.csv")],
                   [CORE+"/config/model_registry.csv"])
-    t3 = baseline("T3", "unused", [], [("{O}/results/T3_corrected_metrics.csv",
+    position_specific_editing = baseline("position-specific-editing", "unused", [], [("{O}/results/T3_corrected_metrics.csv",
                    "tasks/revision/02_R2.1/denominator_correction/results/T3_corrected_metrics.csv")],
                   [REV+"/02_R2.1/execution_eligibility", REV+"/02_R2.1/overlap_audit/CRISPRon_actual_backend_by_target.csv"],
-                  [("tasks/T3/expected/initial/"+f, "{P}/SCI-data/Fig.4/source_data/T3_position_profile_v1/"+f) for f in
+                  [("tasks/position-specific-editing/expected/initial/"+f, "{P}/SCI-data/Fig.4/source_data/T3_position_profile_v1/"+f) for f in
                    ("T3_position_joined_universe_predictions.csv","T3_position_metrics.csv")] +
                   [("tasks/revision/02_R2.1/denominator_correction/results/FORECasT_empty_output_replay.json",
                     "{O}/results/FORECasT_empty_output_replay.json")])
     project = ["--project-root", "{P}", "--revision-root", "{R}"]
     rev = ["--revision-root", "{R}"]
-    t3["commands"] = [("tasks/revision/02_R2.1/denominator_correction/code/correct_t3_denominators.py",
+    position_specific_editing["commands"] = [("tasks/revision/02_R2.1/denominator_correction/code/correct_t3_denominators.py",
                        project + ["--output-dir", "{O}"])]
-    t4 = baseline("T4","verify_t4_v2_1_statistics.py", ["--root", f"{{P}}/{T4_V21}"], [],
+    high_low_activity_screening = baseline("high-low-activity-screening","verify_activity_screening_v2_1.py", ["--root", f"{{P}}/{T4_V21}"], [],
                   [T4_V21+"/source_data",T4_V21+"/tables"])
-    t5 = baseline("T5","replay_joint_matching.py",["--output-dir","{O}"],
-                  [("{O}/"+f,"tasks/T5/tables/"+f) for f in (
+    ranking_transferability = baseline("ranking-transferability","replay_matched_ranking_transfer.py",["--output-dir","{O}"],
+                  [("{O}/"+f,"tasks/ranking-transferability/tables/"+f) for f in (
                       "T5_REFERENCE_TO_SHIFT_CONTRASTS_V1_1.csv","T5_T1_JOINT_MATCHING_ELIGIBILITY_V1_1.csv",
                       "T5_T1_JOINT_MATCHED_DUPLICATE_AUDIT_V1_1.csv")])
-    t6 = baseline("T6","build_t6_applicability_tables.py",[],
-                  [(f"{{P}}/{CORE}/reports/t6_applicability_tables/"+f,"tasks/T6/expected/"+f) for f in (
+    model_reproducibility_and_applicability = baseline("model-reproducibility-and-applicability","build_model_applicability_tables.py",[],
+                  [(f"{{P}}/{CORE}/reports/t6_applicability_tables/"+f,"tasks/model-reproducibility-and-applicability/expected/"+f) for f in (
                       "T6_model_task_applicability_matrix.csv", "T6_coverage_and_failure_evidence.csv")],
                   [CORE+"/config/model_reproducibility_registry_T6.csv"],
-                  [("tasks/T6/code/build_t6_applicability_tables.py",f"{{P}}/{CORE}/scripts/build_t6_applicability_tables.py")])
-    t6["commands"] = [(f"{{P}}/{CORE}/scripts/build_t6_applicability_tables.py", [])]
-    t7 = baseline("T7","replay_recommendation.py",["--output-dir","{O}"], [
-        ("{O}/"+f, "tasks/T7/expected/"+f) for f in ("T7_unique_design_model_group_scores.csv",
+                  [("tasks/model-reproducibility-and-applicability/code/build_model_applicability_tables.py",f"{{P}}/{CORE}/scripts/build_model_applicability_tables.py")])
+    model_reproducibility_and_applicability["commands"] = [(f"{{P}}/{CORE}/scripts/build_model_applicability_tables.py", [])]
+    editor_and_guide_recommendation = baseline("editor-and-guide-recommendation","replay_editor_and_guide_recommendation.py",["--output-dir","{O}"], [
+        ("{O}/"+f, "tasks/editor-and-guide-recommendation/expected/"+f) for f in ("T7_unique_design_model_group_scores.csv",
          "T7_unique_design_random_group_scores.csv", "T7_unique_design_random_metric_distribution.csv",
          "T7_unique_design_oracle_group_scores.csv")])
 
@@ -80,7 +90,9 @@ def cases():
         return revision(name, folder, executable, options, mounts, outputs)
 
     return {spec["name"]:spec for spec in [
-        t1, t2, t3, t4, t5, t6, t7,
+        scalar_editing_activity, bystander_outcome_distribution, position_specific_editing,
+        high_low_activity_screening, ranking_transferability, model_reproducibility_and_applicability,
+        editor_and_guide_recommendation,
         r("neighbors","02_R2.1","overlap_audit/audit_sequence_neighbors.py",project,
           [T1_V8+"/data", CRISPR],
           ["overlap_audit/CRISPRon_guide_neighbor_summary.csv", "overlap_audit/T1_neighborhood_exclusion_associations.csv"]),
@@ -170,7 +182,8 @@ def run(case, work):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     plans = cases()
-    parser.add_argument("task", nargs="?", choices=sorted(plans))
+    parser.add_argument("task", nargs="?", metavar="TASK",
+                        help="Task name from --list (manuscript IDs are also accepted)")
     parser.add_argument("--work-dir", type=Path)
     parser.add_argument("--list", action="store_true")
     args = parser.parse_args()
@@ -179,7 +192,10 @@ def main():
         return
     if not args.task or not args.work_dir:
         parser.error("Provide a task and a new output directory")
-    run(plans[args.task], args.work_dir)
+    task = MANUSCRIPT_TASK_IDS.get(args.task.upper(), args.task)
+    if task not in plans:
+        parser.error(f"Unknown task {args.task!r}; see --list")
+    run(plans[task], args.work_dir)
 
 
 if __name__ == "__main__":

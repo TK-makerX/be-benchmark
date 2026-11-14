@@ -632,13 +632,14 @@ def build_context_invariance(
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     task = Path(__file__).resolve().parents[1]
-    parser.add_argument("--t1-inputs", type=Path, default=task.parent / "T1/inputs")
+    parser.add_argument("--scalar-activity-inputs", "--t1-inputs", type=Path,
+                        default=task.parent / "scalar-editing-activity/inputs")
     parser.add_argument("--prior-contrasts", type=Path,
                         default=task / "inputs/prior_sensitivity/T5_REFERENCE_TO_SHIFT_CONTRASTS_V1.csv")
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
-    panel = pd.read_csv(args.t1_inputs / "T1_V8_LABEL_BLIND_ANALYSIS_PANEL.csv.gz", low_memory=False)
-    common = pd.read_csv(args.t1_inputs / "T1_V8_COMMON_VALID_MODEL_OBSERVATIONS.csv.gz", low_memory=False)
+    panel = pd.read_csv(args.scalar_activity_inputs / "T1_V8_LABEL_BLIND_ANALYSIS_PANEL.csv.gz", low_memory=False)
+    common = pd.read_csv(args.scalar_activity_inputs / "T1_V8_COMMON_VALID_MODEL_OBSERVATIONS.csv.gz", low_memory=False)
     if len(panel) != 10000 or len(common) != 40000:
         raise ValueError("Unexpected frozen T1 denominator")
     eligibility_rows, eligible_tables, excluded_tables = [], [], []

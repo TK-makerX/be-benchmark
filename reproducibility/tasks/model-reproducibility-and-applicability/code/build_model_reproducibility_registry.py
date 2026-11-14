@@ -1003,7 +1003,7 @@ def build_report(df: pd.DataFrame) -> str:
         "",
         "## Figure-Ready Tables",
         "",
-        "The companion script `build_t6_applicability_tables.py` summarizes the registry and saved adapter outputs.",
+        "The companion script `build_model_applicability_tables.py` summarizes the registry and saved adapter outputs.",
         "",
         f"- Model-by-task applicability matrix: `{ROOT / 'reports' / 't6_applicability_tables' / 'T6_model_task_applicability_matrix.csv'}`",
         f"- Environment complexity matrix: `{ROOT / 'reports' / 't6_applicability_tables' / 'T6_environment_complexity_matrix.csv'}`",

@@ -3,51 +3,51 @@
   "replay_count": 20,
   "replays": [
     {
-      "task": "T1",
+      "task": "scalar-editing-activity",
       "status": "PASS",
       "tables_recomputed_and_compared": [
         {
-          "table": "tasks/T1/metrics/PRIMARY_ASSOCIATION_METRICS.csv",
+          "table": "tasks/scalar-editing-activity/metrics/PRIMARY_ASSOCIATION_METRICS.csv",
           "rows": 8
         },
         {
-          "table": "tasks/T1/metrics/METADATA_STRATIFIED_ASSOCIATION.csv",
+          "table": "tasks/scalar-editing-activity/metrics/METADATA_STRATIFIED_ASSOCIATION.csv",
           "rows": 20
         },
         {
-          "table": "tasks/T1/metrics/PRIMARY_DESIGN_CLUSTER_BOOTSTRAP_95CI.csv",
+          "table": "tasks/scalar-editing-activity/metrics/PRIMARY_DESIGN_CLUSTER_BOOTSTRAP_95CI.csv",
           "rows": 4
         },
         {
-          "table": "tasks/T1/metrics/PAIRED_SPEARMAN_DIFFERENCE_BOOTSTRAP.csv",
+          "table": "tasks/scalar-editing-activity/metrics/PAIRED_SPEARMAN_DIFFERENCE_BOOTSTRAP.csv",
           "rows": 6
         },
         {
-          "table": "tasks/T1/expected/v8_1/CRISPRON_ABSOLUTE_CALIBRATION_SUMMARY.csv",
+          "table": "tasks/scalar-editing-activity/expected/v8_1/CRISPRON_ABSOLUTE_CALIBRATION_SUMMARY.csv",
           "rows": 1
         },
         {
-          "table": "tasks/T1/expected/v8_1/CRISPRON_PREDICTED_EFFICIENCY_DECILE_CALIBRATION.csv",
+          "table": "tasks/scalar-editing-activity/expected/v8_1/CRISPRON_PREDICTED_EFFICIENCY_DECILE_CALIBRATION.csv",
           "rows": 10
         }
       ]
     },
     {
-      "task": "T2",
+      "task": "bystander-outcome-distribution",
       "status": "PASS",
       "tables_recomputed_and_compared": [
         {
-          "table": "tasks/T2/expected/T2_expanded_outcome_metrics.csv",
+          "table": "tasks/bystander-outcome-distribution/expected/T2_expanded_outcome_metrics.csv",
           "rows": 5
         },
         {
-          "table": "tasks/T2/expected/T2_expanded_position_metrics.csv",
+          "table": "tasks/bystander-outcome-distribution/expected/T2_expanded_position_metrics.csv",
           "rows": 7
         }
       ]
     },
     {
-      "task": "T3",
+      "task": "position-specific-editing",
       "status": "PASS",
       "tables_recomputed_and_compared": [
         {
@@ -57,61 +57,61 @@
       ]
     },
     {
-      "task": "T4",
+      "task": "high-low-activity-screening",
       "status": "PASS",
       "tables_recomputed_and_compared": [],
       "independent_checks": 327
     },
     {
-      "task": "T5",
+      "task": "ranking-transferability",
       "status": "PASS",
       "tables_recomputed_and_compared": [
         {
-          "table": "tasks/T5/tables/T5_REFERENCE_TO_SHIFT_CONTRASTS_V1_1.csv",
+          "table": "tasks/ranking-transferability/tables/T5_REFERENCE_TO_SHIFT_CONTRASTS_V1_1.csv",
           "rows": 12
         },
         {
-          "table": "tasks/T5/tables/T5_T1_JOINT_MATCHING_ELIGIBILITY_V1_1.csv",
+          "table": "tasks/ranking-transferability/tables/T5_T1_JOINT_MATCHING_ELIGIBILITY_V1_1.csv",
           "rows": 3
         },
         {
-          "table": "tasks/T5/tables/T5_T1_JOINT_MATCHED_DUPLICATE_AUDIT_V1_1.csv",
+          "table": "tasks/ranking-transferability/tables/T5_T1_JOINT_MATCHED_DUPLICATE_AUDIT_V1_1.csv",
           "rows": 24
         }
       ]
     },
     {
-      "task": "T6",
+      "task": "model-reproducibility-and-applicability",
       "status": "PASS",
       "tables_recomputed_and_compared": [
         {
-          "table": "tasks/T6/expected/T6_model_task_applicability_matrix.csv",
+          "table": "tasks/model-reproducibility-and-applicability/expected/T6_model_task_applicability_matrix.csv",
           "rows": 77
         },
         {
-          "table": "tasks/T6/expected/T6_coverage_and_failure_evidence.csv",
+          "table": "tasks/model-reproducibility-and-applicability/expected/T6_coverage_and_failure_evidence.csv",
           "rows": 11
         }
       ]
     },
     {
-      "task": "T7",
+      "task": "editor-and-guide-recommendation",
       "status": "PASS",
       "tables_recomputed_and_compared": [
         {
-          "table": "tasks/T7/expected/T7_unique_design_model_group_scores.csv",
+          "table": "tasks/editor-and-guide-recommendation/expected/T7_unique_design_model_group_scores.csv",
           "rows": 78
         },
         {
-          "table": "tasks/T7/expected/T7_unique_design_random_group_scores.csv",
+          "table": "tasks/editor-and-guide-recommendation/expected/T7_unique_design_random_group_scores.csv",
           "rows": 39
         },
         {
-          "table": "tasks/T7/expected/T7_unique_design_random_metric_distribution.csv",
+          "table": "tasks/editor-and-guide-recommendation/expected/T7_unique_design_random_metric_distribution.csv",
           "rows": 1000
         },
         {
-          "table": "tasks/T7/expected/T7_unique_design_oracle_group_scores.csv",
+          "table": "tasks/editor-and-guide-recommendation/expected/T7_unique_design_oracle_group_scores.csv",
           "rows": 39
         }
       ]
