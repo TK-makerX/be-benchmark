@@ -1,4 +1,6 @@
-# Running the public examples
+# Standalone interface examples
+
+For the study replays and model inference, use the [reproduction guide](../reproducibility/README.md) and [model deployment](../reproducibility/deployment/README.md).
 
 All inputs below are generated test strings. They are not target sequences, guides, experimental observations or examples from an article. The editor and task labels are placeholders. No example downloads a dataset, resolves a model checkpoint or calls a numerical predictor.
 

@@ -5,8 +5,8 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "be-benchmark-shell"
 version = "0.3.0rc1"
-description = "Generic interface scaffold for base-editor prediction backends"
-readme = "README.md"
+description = "Standalone interface demonstration for BE-Benchmark"
+readme = {text = "A small interface demonstration with an empty default backend registry. The repository also provides the BE-Benchmark research reproducibility package.", content-type = "text/plain"}
 license = "MIT"
 license-files = ["LICENSE"]
 requires-python = ">=3.10"

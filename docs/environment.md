@@ -1,6 +1,6 @@
 # Environment and installation
 
-These instructions apply only to the public interface scaffold. They do not describe the environments, dependencies or entry points of private prediction models.
+These commands install the standalone interface demonstration. See the [reproduction guide](../reproducibility/README.md) for the benchmark and [model deployment](../reproducibility/deployment/README.md) for inference environments.
 
 ## Requirements
 

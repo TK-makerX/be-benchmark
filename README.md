@@ -1,42 +1,29 @@
-# BE-Benchmark interface scaffold
+# BE-Benchmark
 
-The [Research reproducibility package](reproducibility/README.md) provides the data and analysis accompanying the revision.
+BE-Benchmark compares base-editor predictors across seven tasks. The repository contains the analysis and model deployment code. The [versioned GitHub release](https://github.com/TK-makerX/be-benchmark/releases/tag/benchmark-revision-2026-11) contains the V5 observation matrix, the source inputs used to build it, and the frozen observations, splits, predictions and results used in the benchmark.
 
-The interface is a generic software scaffold for a base-editor prediction interface. It intentionally contains no manuscript-specific dataset, source-data table, result value, analysis workflow, plotting workflow, trained model, model weight or third-party implementation.
+| Start here | Contents |
+|---|---|
+| [Reproduction guide](reproducibility/README.md) | Download the data, verify the checksums and rerun the analyses. |
+| [Analysis index](reproducibility/tasks/README.md) | Editing activity, bystander outcomes, position-specific editing, activity screening, ranking transfer, model applicability, editor and guide recommendation, and revision analyses. |
+| [Model deployment](reproducibility/deployment/README.md) | Local CLI and web interface, guide generation, model adapters and environment setup. |
+| [Code and data availability](docs/publication_scope.md) | Published files, upstream sources and license scope. |
 
-The scaffold provides only:
+## Reproduce the benchmark
 
-- request validation;
-- an empty backend registry contract;
-- abstract routing and connector interfaces;
-- a command-line demonstration;
-- a local web-interface demonstration;
-- lightweight packaging and contract tests.
+Use Python 3.10 or 3.11 and run these commands from the repository root.
 
-The default registry is empty. Consequently, the application validates requests but does not produce a scientific prediction. Add a separately licensed backend in a private deployment before numerical inference is possible.
-
-## Quick start: no model or dataset required
-
-Python 3.10 or later is required. The source-tree demonstration uses only the Python standard library; it does not require package installation, a GPU or a model download.
-
-Run these commands from a clean checkout, before creating a virtual environment or installing the package:
-
-```text
-python -B scripts/verify_release.py
-python -B examples/run_demo.py
-python -B -m unittest discover -s tests -v
+```bash
+python -B reproducibility/scripts/fetch_assets.py
+python -B reproducibility/scripts/verify_bundle.py
+python -m pip install -r reproducibility/requirements-analysis.txt
+python -B reproducibility/scripts/replay.py --list
 ```
 
-If your interpreter is named `python3`, use that command instead. The demonstration generates a repeated-character input in memory and explicitly selects the bundled empty registry. Its expected status is `backend_not_configured`, with a null backend identifier and no prediction field. This means the interface ran successfully; it is not a model prediction or a biological example.
+Select a command from the [analysis index](reproducibility/tasks/README.md). Replays use the released observations and frozen predictions. For new inference, follow the [model setup](reproducibility/deployment/README.md) and obtain the required upstream checkpoints.
 
-- [Environment and installation](docs/environment.md): source-only use, virtual environments, configuration and checks.
-- [Running the examples](docs/running_examples.md): CLI commands, the local web form, expected responses and troubleshooting.
-- [Publication scope](docs/publication_scope.md): what this public repository does and does not include.
-
-This scaffold is not the analysis code used to generate an article and must not be described as a result-reproduction package.
+The separate `be-benchmark-shell` package contains a [standalone interface demonstration](docs/running_examples.md) with an empty backend registry.
 
 ## License
 
-Released under the MIT License. See `LICENSE`.
-
-The MIT License applies only to the first-party interface scaffold in this repository. It does not grant rights to excluded model implementations, weights, datasets or private backends.
+The standalone interface package is under the MIT License. Benchmark data and upstream model components follow the terms listed in the [availability statement](docs/publication_scope.md). [MIT License](LICENSE)

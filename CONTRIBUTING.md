@@ -1,3 +1,5 @@
 # Contributing
 
-Keep backend implementations outside this public scaffold unless their redistribution terms are confirmed. New connectors must preserve the request and response contracts and must not add manuscript-derived values or private assets.
+Keep the request and response contracts stable when updating the interface demonstration. For benchmark changes, record the source identifiers, inputs and checksums in the reproduction package. Follow the terms of each upstream asset before redistributing it.
+
+[Code and data availability](docs/publication_scope.md)

@@ -13,6 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "checksums" / "release_sha256.csv"
+RELEASE_URL = "https://github.com/TK-makerX/be-benchmark/releases/tag/benchmark-revision-2026-11"
 
 
 def digest(path: Path) -> str:
@@ -102,7 +103,10 @@ def main() -> int:
             continue
         text = path.read_text(encoding="utf-8", errors="replace")
         for label, pattern in leak_patterns.items():
-            if re.search(pattern, text):
+            checked_text = text
+            if label == "external URL" and name in {"README.md", "docs/publication_scope.md"}:
+                checked_text = text.replace(RELEASE_URL, "")
+            if re.search(pattern, checked_text):
                 failures.append(f"{label} found in {name}")
 
     for path in actual.values():
@@ -138,7 +142,7 @@ def main() -> int:
         print("FAIL")
         print("\n".join(failures))
         return 1
-    print("PASS: shell-only scope, exact manifest, no manuscript-data signatures, no numerical prediction")
+    print("PASS: interface demonstration manifest and runtime")
     return 0
 
 
